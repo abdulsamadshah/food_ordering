@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.microlan.rushhandingoffline">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/mln_pos_icon"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/mln_pos_icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activities.AddProductDesc"></activity>
+        <activity android:name=".Activities.ProductList"
+            android:parentActivityName=".Activities.CompanySetting"/>
+        <activity android:name=".Activities.GSTTABLE" />
+        <activity android:name=".Activities.AddProductList"
+            android:parentActivityName=".Activities.ProductList"/>
+        <activity android:name=".Activities.CagogeryList"
+            android:parentActivityName=".Activities.CompanySetting"/>
+        <activity android:name=".Activities.SettingCompany"
+            android:parentActivityName=".Activities.CompanySetting"/>
+        <activity android:name=".Activities.CompanySetting"
+            android:parentActivityName=".Activities.MainActivity"/>
+        <activity android:name=".Activities.OrderHostory" />
+        <activity android:name=".Activities.OrderDetails" />
+        <activity android:name=".Activities.ItemInCartOffline" />
+        <activity android:name=".Activities.OfflineCounter" />
+        <activity android:name=".Activities.ForgotPassword" />
+        <activity
+            android:name=".Activities.OrderProducts"
+            android:parentActivityName=".Activities.Orders" />
+        <activity android:name=".Activities.PreviewActivity" />
+        <activity android:name=".Activities.Scrollviws" />
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_live_5jBUjcs2lvwjSP" />
+
+        <activity
+            android:name=".Activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.Counters"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Orders"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.BarcodeScan"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".Activities.SplashScreen"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.Login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".Activities.BillPage"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".Activities.Customers"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.ImportData"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.StockList"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.RewardPoints"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.GSTCalculations"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.TrendingProducts"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.PremiumMembership"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.FAQ"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.TermsAndConditions"
+            android:parentActivityName=".Activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Activities.Add_Category" />
+    </application>
+
+</manifest>

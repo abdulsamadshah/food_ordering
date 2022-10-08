@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Counter Order">
+        <menu>
+            <item
+                android:id="@+id/nav_take_order"
+                android:icon="@drawable/takeorder"
+                android:title="Take Order" />
+            <item
+                android:id="@+id/nav_order_list"
+                android:visible="false"
+                android:title="Order List" />
+            <item
+                android:id="@+id/nav_order_list_offile"
+                    android:icon="@drawable/orderlist"
+                android:title="Order List offline" />
+            <!--<item-->
+                <!--android:id="@+id/nav_trending_products"-->
+                <!--android:title="Trending Products" />-->
+
+            <item
+                android:id="@+id/nav_licenses"
+                android:title="Licenses" />
+
+            <!--<item-->
+                <!--android:id="@+id/nav_reward_points"-->
+                <!--android:title="Reward Points" />-->
+
+            <!--<item-->
+                <!--android:id="@+id/nav_gst"-->
+                <!--android:title="GST" />-->
+
+            <item
+                android:id="@+id/nav_faq"
+                android:visible="false"
+                android:title="FAQ" />
+            <item
+                android:id="@+id/nav_com_set"
+                android:icon="@drawable/setting"
+                android:visible="false"
+                android:title="Company Setting" />
+
+            <item
+                android:id="@+id/nav_terms"
+                android:visible="false"
+                android:title="Terms And Conditions" />
+        </menu>
+    </item>
+
+</menu>

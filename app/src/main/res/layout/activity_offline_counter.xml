@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android">
+
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/tool"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/back"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="  Offline Counter"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:textColor="@color/qr_code_white"/>
+
+        <ImageView
+            android:id="@+id/scanqr"
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/camera_scan_icon"/>
+        <RelativeLayout
+            android:id="@+id/card"
+            android:layout_width="50sp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5sp"
+                android:elevation="2sp"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:text=""
+                android:gravity="center"
+                android:id="@+id/countText"
+                android:background="@drawable/circle_shape"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/whitecard"
+                android:padding="15sp"
+                android:id="@+id/cart"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</androidx.appcompat.widget.Toolbar>
+
+
+<LinearLayout
+    android:layout_below="@+id/tool"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".Activities.OfflineCounter">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:padding="4sp"
+            android:text="Total Cart"/>
+
+        <TextView
+            android:layout_width="0sp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:id="@+id/totalAmountText" />
+        <ImageView
+            android:id="@+id/down"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/down"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="#BDBDBD"/>
+
+    <LinearLayout
+        android:id="@+id/catogery"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="150sp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/categoriesrecy">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="#BDBDBD"/>
+
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/br_round_edittext"
+        android:padding="7dp"
+        android:textSize="14sp"
+        android:drawablePadding="5sp"
+        android:textColor="@android:color/black"
+        android:layout_margin="5sp"
+        android:id="@+id/searchProductEdit"
+        android:hint="Search..."/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="#BDBDBD"/>
+
+    <!--
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="Categories"/>
+
+                <View
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="#BDBDBD"/>
+
+                <TextView
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="Products"/>
+
+            </LinearLayout>
+    -->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="#BDBDBD"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+
+
+        <View
+            android:layout_width="1sp"
+            android:layout_height="match_parent"
+            android:background="#BDBDBD"
+            android:layout_marginLeft="3sp"
+            android:layout_marginRight="3sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:verticalSpacing="5sp"
+                android:horizontalSpacing="5sp"
+                android:numColumns="3"
+                android:scrollbars="none"
+                android:id="@+id/productsGrid">
+
+            </GridView>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorAccent"
+    android:textColor="@android:color/white"
+    android:textSize="16sp"
+    android:visibility="gone"
+    android:text="Save"
+    android:id="@+id/saveBtn"
+    android:textStyle="bold"/>
+
+</RelativeLayout>

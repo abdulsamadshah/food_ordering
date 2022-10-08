@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10sp"
+    tools:context=".Activities.ImportData">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/br_round_edittext"
+        android:textSize="15sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:padding="10sp"
+        android:visibility="gone"
+        android:id="@+id/importProductsText"
+        android:text="Import Products"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/br_round_edittext"
+        android:textSize="15sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:padding="10sp"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:id="@+id/importOrdersText"
+        android:text="Import Orders"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/br_round_edittext"
+        android:textSize="15sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:padding="10sp"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:id="@+id/importCustomers"
+        android:text="Import Customers"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/br_round_edittext"
+        android:textSize="15sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:padding="10sp"
+        android:layout_marginTop="10sp"
+        android:id="@+id/importAllDate"
+        android:text="Import All Data"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/br_round_edittext"
+        android:textSize="15sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:padding="10sp"
+        android:layout_marginTop="10sp"
+        android:id="@+id/exportAllData"
+        android:text="Export All Data"/>
+
+</LinearLayout>

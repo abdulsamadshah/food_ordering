@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<item-->
+        <!--android:id="@+id/action_import"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="logout"-->
+        <!--app:showAsAction="always"-->
+        <!--android:icon="@drawable/import_icon"/>-->
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        android:title="logout"
+        app:showAsAction="always"
+        android:icon="@mipmap/mln_pos_icon"/>
+</menu>

@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="290sp"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0sp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:text="Search Customer"/>
+
+            <TextView
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:id="@+id/addNewCustomerText"
+                android:text="+ Add New"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5sp">
+
+            <LinearLayout
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:hint="Select Customer..."
+                    android:textSize="16sp"
+                    android:inputType="text"
+                    android:background="@drawable/br_round_edittext"
+                    android:drawableStart="@drawable/search_black_icon"
+                    android:drawablePadding="5sp"
+                    android:id="@+id/customersEdit"
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="Select Payment Type"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/br_round_edittext">
+
+            <com.reginald.editspinner.EditSpinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Base.Widget.AppCompat.Spinner"
+                android:padding="10sp"
+                android:inputType="none"
+                android:id="@+id/paymentTypeEdit"
+                android:editable="false"
+                android:hint="Payment Type"/>
+
+        </LinearLayout>
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="15sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:id="@+id/customerPointsText"-->
+            <!--android:text="Customer Points : 0"-->
+            <!--android:layout_marginBottom="5sp"/>-->
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/br_round_edittext"-->
+            <!--android:padding="10sp"-->
+            <!--android:hint="Enter Customer Points..."-->
+            <!--android:textSize="15sp"-->
+            <!--android:layout_marginBottom="5sp"-->
+            <!--android:inputType="numberDecimal"-->
+            <!--android:maxLength="2"-->
+            <!--android:id="@+id/customerPointsEdit"-->
+            <!--android:textColor="@android:color/black"/>-->
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:layout_marginTop="10sp"
+            android:textStyle="bold"
+            android:text="Offer Code"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/br_round_edittext"
+            android:padding="10sp"
+            android:layout_marginTop="5sp"
+            android:hint="Enter Offer Code..."
+            android:textSize="15sp"
+            android:inputType="text"
+            android:id="@+id/offerCodeEdit"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/offertxts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:layout_marginTop="10sp"
+            android:textStyle="bold"
+            android:text="GST Amount"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/br_round_edittext"
+            android:padding="10sp"
+            android:layout_marginTop="5sp"
+            android:hint="Cart Total Amount"
+            android:textSize="15sp"
+            android:inputType="text"
+            android:id="@+id/gst_total"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/offertxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:layout_marginTop="10sp"
+            android:textStyle="bold"
+            android:text="SubTotal Amount With Gst"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/br_round_edittext"
+            android:padding="10sp"
+            android:layout_marginTop="5sp"
+            android:hint="Cart Total Amount"
+            android:textSize="15sp"
+            android:inputType="text"
+            android:id="@+id/cart_total"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/dicleb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="Discount"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio_lay"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/yourgroup"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/price"
+                    android:layout_width="0dp"
+                    android:layout_weight=".4"
+
+                    android:layout_height="wrap_content"
+                    android:text="Flat(₹)"/>
+                <RadioButton
+                    android:id="@+id/discount"
+                    android:layout_width="0dp"
+                    android:layout_weight=".6"
+                    android:layout_height="wrap_content"
+                    android:text=" Percentage (%)"/>
+
+
+            </RadioGroup>
+
+        </LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/br_round_edittext"
+            android:padding="10sp"
+            android:layout_marginTop="5sp"
+            android:hint="Enter Discount Amount"
+            android:textSize="15sp"
+            android:text="0"
+            android:inputType="number"
+            android:id="@+id/discountEdit"
+            android:textColor="@android:color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:visibility="gone"
+                android:id="@+id/after_dis"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#fff"
+                android:background="#0000"
+                android:visibility="gone"
+                android:id="@+id/after_dis_per"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/br_round_edittext"
+            android:padding="10sp"
+            android:layout_marginTop="5sp"
+            android:hint="Enter Discount Percentage..."
+            android:textSize="15sp"
+            android:visibility="gone"
+            android:inputType="numberDecimal"
+            android:id="@+id/perdiscountEdit"
+            android:textColor="@android:color/black"/>
+
+
+
+        <TextView
+            android:id="@+id/finaltxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:visibility="gone"
+            android:layout_marginTop="10sp"
+            android:textStyle="bold"
+            android:text="SubTotal Amount"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/br_round_edittext"
+            android:padding="10sp"
+            android:layout_marginTop="5sp"
+            android:hint="Balance Amount..."
+            android:textSize="15sp"
+            android:inputType="number"
+            android:visibility="gone"
+            android:clickable="false"
+            android:id="@+id/OutstandingAmountEdit"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:background="#000"
+            android:visibility="gone"
+            android:textColor="#FFEB3B"
+            android:id="@+id/sumtotal"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:visibility="gone"
+            android:id="@+id/sumtotalamt"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5sp"
+            android:id="@+id/walletBalanceText"
+            android:text="Wallet : 0"
+            android:layout_marginBottom="5sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/br_round_edittext"
+            android:padding="10sp"
+            android:hint="Enter Wallet..."
+            android:textSize="15sp"
+            android:layout_marginBottom="5sp"
+            android:inputType="number"
+            android:maxLength="2"
+            android:id="@+id/walletPointsEdit"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:layout_marginTop="10sp"
+            android:textStyle="bold"
+            android:text="Balance Amount"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/br_round_edittext"
+            android:padding="10sp"
+            android:layout_marginTop="5sp"
+            android:hint="Final Amount..."
+            android:textSize="15sp"
+            android:inputType="text"
+            android:clickable="false"
+            android:id="@+id/OutstandingEdit"
+            android:textColor="@android:color/black"/>
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:id="@+id/deliveryCheck"
+            android:textStyle="bold"
+            android:text="Delivery Available"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/deliveryLayout"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="15sp"
+                android:id="@+id/addnewaddress"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:text="+ Add Address"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:layout_marginTop="5sp"
+                android:textStyle="bold"
+                android:text="Delivery Address"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addressracycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:id="@+id/addaddresslay"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="5sp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:text="Address"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="3sp"
+                        android:layout_marginBottom="3sp"
+                        android:padding="10sp"
+                        android:id="@+id/customerAddressEdit"
+                        android:hint="Enter Address"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:background="@drawable/br_round_edittext"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5sp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="Near Area"/>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="3sp"
+                            android:layout_marginBottom="3sp"
+                            android:padding="10sp"
+                            android:hint="Enter Area"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:id="@+id/customerNearAreaEdit"
+                            android:background="@drawable/br_round_edittext"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5sp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="City"/>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="3sp"
+                            android:layout_marginBottom="3sp"
+                            android:padding="10sp"
+                            android:hint="Enter City"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:id="@+id/customerCityEdit"
+                            android:background="@drawable/br_round_edittext"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5sp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="State"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3sp"
+                            android:layout_marginBottom="3sp"
+                            android:background="@drawable/br_round_edittext">
+                            <com.reginald.editspinner.EditSpinner
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:padding="10sp"
+                                style="@style/Base.Widget.AppCompat.Spinner"
+                                android:textColor="@android:color/black"
+                                android:id="@+id/customerStateEdit"
+                                android:hint="State"
+                                android:inputType="none"
+                                android:editable="false"
+                                android:maxLines="1"/>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5sp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="Pincode"/>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="3sp"
+                            android:layout_marginBottom="3sp"
+                            android:padding="10sp"
+                            android:maxLength="6"
+                            android:hint="Enter Pincode"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:id="@+id/customerPincodeEdit"
+                            android:background="@drawable/br_round_edittext"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10sp"
+                    android:background="@color/colorAccent"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:id="@+id/saveCustomerBtn"
+                    android:text="Save"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="20sp"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:id="@+id/saveBtn"
+            android:text="Save"/>
+
+    </LinearLayout>
+</ScrollView>

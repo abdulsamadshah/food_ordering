@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280sp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10sp"
+            android:id="@+id/addNewCustomerLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:text="Customer Name"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginBottom="3sp"
+                    android:padding="10sp"
+                    android:id="@+id/customerNameEdit"
+                    android:hint="Enter Customer Name"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:background="@drawable/br_round_edittext"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="5sp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:text="Customer Mobile"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginBottom="3sp"
+                    android:padding="10sp"
+                    android:id="@+id/customerMobileEdit"
+                    android:hint="Enter Mobile"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:background="@drawable/br_round_edittext"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:text="Customer Email"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="3sp"
+                    android:layout_marginBottom="3sp"
+                    android:padding="10sp"
+                    android:hint="Enter Customer Email"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:id="@+id/customerEmailEdit"
+                    android:background="@drawable/br_round_edittext"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/addresslayout"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="5sp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:text="Address"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="@android:color/black"
+                        android:layout_marginTop="3sp"
+                        android:layout_marginBottom="3sp"
+                        android:padding="10sp"
+                        android:id="@+id/customerAddressEdit"
+                        android:hint="Enter Address"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:background="@drawable/br_round_edittext"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5sp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="Near Area"/>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="3sp"
+                            android:layout_marginBottom="3sp"
+                            android:padding="10sp"
+                            android:hint="Enter Area"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:id="@+id/customerNearAreaEdit"
+                            android:background="@drawable/br_round_edittext"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5sp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="City"/>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="3sp"
+                            android:layout_marginBottom="3sp"
+                            android:padding="10sp"
+                            android:hint="Enter City"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:id="@+id/customerCityEdit"
+                            android:background="@drawable/br_round_edittext"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5sp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="State"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3sp"
+                            android:layout_marginBottom="3sp"
+                            android:background="@drawable/br_round_edittext">
+                            <Spinner
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:textSize="15sp"
+                                android:padding="18sp"
+                                android:textColor="@android:color/black"
+                                android:id="@+id/customerStateEdit"
+                                android:hint="State"
+                                android:inputType="none"
+                                android:editable="false"
+                                android:maxLines="1"/>
+                            <!--
+                                                    <com.reginald.editspinner.EditSpinner
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:textSize="15sp"
+                                                        android:padding="10sp"
+                                                        style="@style/Base.Widget.AppCompat.Spinner"
+                                                        android:textColor="@android:color/black"
+                                                        android:id="@+id/customerStateEdit"
+                                                        android:hint="State"
+                                                        android:inputType="none"
+                                                        android:editable="false"
+                                                        android:maxLines="1"/>
+                            -->
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"/>
+
+                    <LinearLayout
+                        android:layout_width="0sp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5sp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="Pincode"/>
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="@android:color/black"
+                            android:layout_marginTop="3sp"
+                            android:layout_marginBottom="3sp"
+                            android:padding="10sp"
+                            android:maxLength="6"
+                            android:hint="Enter Pincode"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:id="@+id/customerPincodeEdit"
+                            android:background="@drawable/br_round_edittext"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:id="@+id/saveCustomerBtn"
+                android:text="Save"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

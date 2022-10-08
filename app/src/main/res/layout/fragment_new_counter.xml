@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10sp">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/br_round_edittext"
+        android:padding="10sp"
+        android:drawablePadding="5sp"
+        android:textSize="18sp"
+        android:drawableStart="@drawable/search_icon"
+        android:hint="Search Product Here..."/>
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7sp"
+        android:verticalSpacing="7sp"
+        android:clipToPadding="false"
+        android:paddingBottom="3sp"
+        android:id="@+id/productsGrid">
+
+    </GridView>
+
+</LinearLayout>

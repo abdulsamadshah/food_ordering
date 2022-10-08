@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10sp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="0sp"
+        android:layout_height="24sp"
+        android:layout_weight="1"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:id="@+id/orderNumberText"
+        android:text="Order Number"/>
+
+    <TextView
+        android:layout_width="0sp"
+        android:layout_height="24sp"
+        android:layout_weight="0.3"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:id="@+id/orderAmountText"
+        android:textStyle="bold"
+        android:text="Amount"/>
+
+</LinearLayout>
