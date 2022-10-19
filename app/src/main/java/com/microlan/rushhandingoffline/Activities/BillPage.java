@@ -425,7 +425,6 @@ public class BillPage extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), imagePath.getAbsolutePath() + "", Toast.LENGTH_SHORT).show();
             boolean_save = true;
             String filePath = imagePath.getPath();
-
             Log.d("", "filePath" + filePath);
             sharePath = filePath;
 
