@@ -151,6 +151,7 @@ public class Counters extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Counters.this, QrCodeActivity.class);
                 startActivityForResult( i,REQUEST_CODE_QR_SCAN);
+//                startActivity(i);
             }
         });
 /*
@@ -375,7 +376,8 @@ public class Counters extends AppCompatActivity {
         ProductImage.clear();
         ProductQuan.clear();
 
-        final String url = "http://microlanpos.com/demo/api2/get_all_product";
+//        final String url = "http://microlanpos.com/demo/api2/get_all_product";
+        final String url = "https://navy.microlan.in/api2/get_all_product";
 
         // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -814,15 +816,14 @@ public class Counters extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(resultCode != Activity.RESULT_OK)
-        {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
             //Log.d(LOGTAG,"COULD NOT GET A GOOD RESULT.");
-            if(data==null)
+            if (data == null)
                 return;
             //Getting the passed result
             String result = data.getStringExtra("com.blikoon.qrcodescanner.error_decoding_image");
-            if( result!=null)
-            {
+            if (result != null) {
                 AlertDialog alertDialog = new AlertDialog.Builder(Counters.this).create();
                 alertDialog.setTitle("Scan Error");
                 alertDialog.setMessage("QR Code could not be scanned");
@@ -838,12 +839,11 @@ public class Counters extends AppCompatActivity {
             return;
 
         }
-        if(requestCode == REQUEST_CODE_QR_SCAN)
-        {
-            if(data==null)
+        if (requestCode == REQUEST_CODE_QR_SCAN) {
+            if (data == null)
                 return;
             String result = data.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult");
-            Log.d("","result"+result);
+            Log.d("", "result" + result);
 
 
 /*
@@ -853,7 +853,7 @@ public class Counters extends AppCompatActivity {
             parameters.put("map_with", map_with);
 */
 
-            AddQRProducts(result,session_id,UserID);
+            AddQRProducts(result, session_id, UserID);
         }
     }
 

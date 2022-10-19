@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.microlan.rushhandingoffline">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -14,25 +20,31 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/mln_pos_icon"
+        android:icon="@mipmap/appicons"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/mln_pos_icon"
+        android:roundIcon="@mipmap/appicons"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.AddProductDesc"></activity>
-        <activity android:name=".Activities.ProductList"
-            android:parentActivityName=".Activities.CompanySetting"/>
+
+        <activity android:name=".Activities.AddProductDesc" />
+        <activity
+            android:name=".Activities.ProductList"
+            android:parentActivityName=".Activities.CompanySetting" />
         <activity android:name=".Activities.GSTTABLE" />
-        <activity android:name=".Activities.AddProductList"
-            android:parentActivityName=".Activities.ProductList"/>
-        <activity android:name=".Activities.CagogeryList"
-            android:parentActivityName=".Activities.CompanySetting"/>
-        <activity android:name=".Activities.SettingCompany"
-            android:parentActivityName=".Activities.CompanySetting"/>
-        <activity android:name=".Activities.CompanySetting"
-            android:parentActivityName=".Activities.MainActivity"/>
+        <activity
+            android:name=".Activities.AddProductList"
+            android:parentActivityName=".Activities.ProductList" />
+        <activity
+            android:name=".Activities.CagogeryList"
+            android:parentActivityName=".Activities.CompanySetting" />
+        <activity
+            android:name=".Activities.SettingCompany"
+            android:parentActivityName=".Activities.CompanySetting" />
+        <activity
+            android:name=".Activities.CompanySetting"
+            android:parentActivityName=".Activities.MainActivity" />
         <activity android:name=".Activities.OrderHostory" />
         <activity android:name=".Activities.OrderDetails" />
         <activity android:name=".Activities.ItemInCartOffline" />
@@ -50,6 +62,7 @@
 
         <activity
             android:name=".Activities.MainActivity"
+            android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -73,6 +86,7 @@
             android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".Activities.SplashScreen"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
@@ -81,6 +95,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Activities.Login"
             android:screenOrientation="portrait"

@@ -20,6 +20,7 @@ public interface ApiInterface
     Call<AnnouncementResponse> getnoti();
 
 
+
     @POST("submit_forgot_password")
     Call<ResponseBody> newforgot(@Query("user_id") String user_id, @Query("password") String password);
 

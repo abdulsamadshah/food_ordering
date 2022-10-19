@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,7 +28,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -40,34 +43,27 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.microlan.rushhandingoffline.Adapters.CounterProductRecyclerAdapter;
-import com.microlan.rushhandingoffline.BaseURL.ApiClient;
-import com.microlan.rushhandingoffline.BaseURL.ApiInterface;
 import com.microlan.rushhandingoffline.DB.AllCustomerDBHelper;
 import com.microlan.rushhandingoffline.DB.AllGstDBHelper;
 import com.microlan.rushhandingoffline.DB.AllStateCodeDBHelper;
 import com.microlan.rushhandingoffline.DB.CustomerAddressDBHelper;
 import com.microlan.rushhandingoffline.DB.ItemInCartDBHelper;
-import com.microlan.rushhandingoffline.DBAdapter.CounterAdapter;
 import com.microlan.rushhandingoffline.Dialogs.BillDetailsDialog;
 import com.microlan.rushhandingoffline.Dialogs.CustomDialogAddCustomer;
 import com.microlan.rushhandingoffline.OfflineModel.ALLCustomerModel;
 import com.microlan.rushhandingoffline.OfflineModel.AllCustomerAddressModel;
 import com.microlan.rushhandingoffline.OfflineModel.AllGstModel;
-import com.microlan.rushhandingoffline.OfflineModel.AllProductModel;
 import com.microlan.rushhandingoffline.OfflineModel.ItemInCardModel;
 import com.microlan.rushhandingoffline.OfflineModel.StateModel;
 import com.microlan.rushhandingoffline.R;
 import com.microlan.rushhandingoffline.model.UserAddressItem;
-import com.microlan.rushhandingoffline.model.UserAddressResponse;
 import com.reginald.editspinner.EditSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -78,69 +74,72 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-
 import static com.microlan.rushhandingoffline.Activities.SplashScreen.decrypt;
 import static com.microlan.rushhandingoffline.Activities.SplashScreen.encrypt;
 
 public class ItemInCartOffline extends AppCompatActivity {
-
+    String wdata, cdata;
+    ArrayList<String> paymentList;
     ItemInCartDBHelper dbAddItemHelpers;
-
+    Double walletamounts, pBalanceAmount;
     AllCustomerDBHelper dbAddCustomer;
     CustomerAddressDBHelper dbcustomeraddress;
     AllStateCodeDBHelper addstate;
     ArrayList<ItemInCardModel> arrayListitem;
     ArrayList<ALLCustomerModel> arraycustomerListitem;
     ArrayList<AllCustomerAddressModel> arrayaddressListitem;
-    ArrayList<String> CartID, CartProductID, CartProductName, CartProductImage, CartProductQuan, CartProductPrice, CartUnitTotal, CArtPAckSize, Cartprice, CartColor, CartSize, CartpackUnit,CartProductcode;
+    ArrayList<String> CartID, CartProductID, CartProductName, CartProductImage, CartProductQuan, CartProductPrice, CartUnitTotal, CArtPAckSize, Cartprice, CartColor, CartSize, CartpackUnit, CartProductcode;
     RecyclerView ProductsInCounterGrid;
     CounterProductRecyclerAdapter counterProductRecyclerAdapter;
     String Intro = "", UserID, session_id;
     SharedPreferences sharedPreferences;
-    RequestQueue requestQueue;
     Button save;
     AutoCompleteTextView CustomerEdit;
     CustomDialogAddCustomer customDialogAddCustomer;
-    EditSpinner PaymentTypeEdit;
+    EditSpinner PaymentTypeEdits;
     TextView CustomerPointsText, CustomerWalletText;
-    EditText CustomerPointsEdit, CustomerWalletEdit;
+    TextView CustomerPointsEdit, CustomerWalletEdit;
     BillDetailsDialog billDetailsDialog;
     List<UserAddressItem> userAddress;
     RecyclerView addressracycler;
-    String customerid,SeletedAddress="";
-    RadioButton price,discount,discountyes;
-    String countvac="0",dicountlist="0",extra_rate="0",CustomerAddresss,totalweight,balance_amt;
+    String customerid, SeletedAddress = "";
+    RadioButton price, discount, discountyes;
+    String countvac = "0", dicountlist = "0", extra_rate = "0", CustomerAddresss, totalweight, balance_amt;
     Float TotalAmount = Float.valueOf(String.valueOf(0.0));
-    Float AfterDicount,Afterdicountamt,CartTotalAmt;
+    Float AfterDicount, Afterdicountamt, CartTotalAmt;
     ProgressDialog progressDialog;
     String TotalWallet;
     ArrayAdapter<String> StateAdapter;
+    Dialog dialog;
+    private ArrayAdapter adapter;
+    RequestQueue requestQueue;
+    ArrayList<String> userdata;
+    ArrayList<String> userId;
 
     TextView TotalAmountText;
-    ArrayList<String> CustomerID, CustomerUniqe,CustomerName, CustomerAddress, StatesList, CustomerState;
+    ArrayList<String> CustomerID, CustomerUniqe, CustomerName, CustomerAddress, StatesList, CustomerState;
     double CartSGSTAmount = 0.0;
     double CartIGSTAmount = 0.0;
     double CartCGSTAmount = 0.0;
     TextView grandTotalText;
     Float sum = Float.valueOf(String.valueOf(0.0));
-    String CustomerStateString="",customeruniqrid;
-    String SelectedStatecode,HascodeStatecode;
-    String SelectedStateName,State_code;
-    ArrayList<String > Statename,StateCode,Addstatename,Addstatecode;
+    String CustomerStateString = "", customeruniqrid;
+    String SelectedStatecode, HascodeStatecode;
+    String SelectedStateName, State_code;
+    ArrayList<String> Statename, StateCode, Addstatename, Addstatecode;
     AllGstDBHelper dbgstHelpers;
     ArrayList<AllGstModel> arrayListgst;
     ArrayList<StateModel> arraystatecode;
 
     Spinner CustomerStateEdit;
 
-    ArrayList<String> SGSTLIST,CGSTLIST,CESSLIST,IGSTLIST;
-    String GstType="I";
+    ArrayList<String> SGSTLIST, CGSTLIST, CESSLIST, IGSTLIST;
+    String GstType = "I";
     String subtotal;
     ImageView back;
-    double GstTotal=0.0;
+    double GstTotal = 0.0;
+    ArrayAdapter adapters;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,8 +153,9 @@ public class ItemInCartOffline extends AppCompatActivity {
         Intro = decrypt(Intro);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        Log.d("","UserID"+UserID);
-        Log.d("","State_code"+State_code);
+
+        Log.d("", "UserID" + UserID);
+        Log.d("", "State_code" + State_code);
 
         dbAddItemHelpers = new ItemInCartDBHelper(getApplicationContext());
         dbAddCustomer = new AllCustomerDBHelper(getApplicationContext());
@@ -164,15 +164,15 @@ public class ItemInCartOffline extends AppCompatActivity {
         addstate = new AllStateCodeDBHelper(getApplicationContext());
 
 
-        Log.d("","arraycustomerListitem"+arraycustomerListitem);
+        Log.d("", "arraycustomerListitem" + arraycustomerListitem);
 
         billDetailsDialog = new BillDetailsDialog(ItemInCartOffline.this);
         customDialogAddCustomer = new CustomDialogAddCustomer(ItemInCartOffline.this);
 
-        grandTotalText=findViewById(R.id.grandTotalText);
+        grandTotalText = findViewById(R.id.grandTotalText);
         ProductsInCounterGrid = (RecyclerView) findViewById(R.id.productsInCounterGrid);
-        save=findViewById(R.id.save);
-        back=findViewById(R.id.back);
+        save = findViewById(R.id.save);
+        back = findViewById(R.id.back);
 
 
         CustomerID = new ArrayList<String>();
@@ -188,17 +188,14 @@ public class ItemInCartOffline extends AppCompatActivity {
         IGSTLIST = new ArrayList<String>();
 
 
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),OfflineCounter.class);
+                Intent intent = new Intent(getApplicationContext(), OfflineCounter.class);
                 startActivity(intent);
                 finish();
             }
         });
-
-
 
 
         StateCode = new ArrayList<String>();
@@ -286,19 +283,17 @@ public class ItemInCartOffline extends AppCompatActivity {
 
         arraystatecode = addstate.getallstae();
 
-        if(arraystatecode==null || arraystatecode.isEmpty() || arraystatecode.size()==0)
-        {
+        if (arraystatecode == null || arraystatecode.isEmpty() || arraystatecode.size() == 0) {
             GetAllstate();
 
-        }
-        else {
+        } else {
 
             getstate();
 
         }
 
 
-        Log.d("arrayListcatogery","arrayListcatogery"+arrayListitem);
+        Log.d("arrayListcatogery", "arrayListcatogery" + arrayListitem);
 
         CartID = new ArrayList<String>();
         CartProductID = new ArrayList<String>();
@@ -321,7 +316,7 @@ public class ItemInCartOffline extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                subtotal= String.valueOf(Float.valueOf(grandTotalText.getText().toString()));
+                subtotal = String.valueOf(Float.valueOf(grandTotalText.getText().toString()));
 /*
                 double totalsgt=0.0;
                 double totaligst=0.0;
@@ -448,21 +443,20 @@ public class ItemInCartOffline extends AppCompatActivity {
 
                 if (CartProductID.isEmpty()) {
                     Toast.makeText(ItemInCartOffline.this, "Please Add Products To Cart.", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     billDetailsDialog.show();
 
 
-                arraycustomerListitem = dbAddCustomer.getallcustomer();
+                    arraycustomerListitem = dbAddCustomer.getallcustomer();
 
-                TextView AddCustomerText = (TextView) billDetailsDialog.findViewById(R.id.addNewCustomerText);
+                    TextView AddCustomerText = (TextView) billDetailsDialog.findViewById(R.id.addNewCustomerText);
                     TextView addnewaddress = (TextView) billDetailsDialog.findViewById(R.id.addnewaddress);
                     CustomerEdit = (AutoCompleteTextView) billDetailsDialog.findViewById(R.id.customersEdit);
-                    PaymentTypeEdit = (EditSpinner) billDetailsDialog.findViewById(R.id.paymentTypeEdit);
-                    EditText OfferCodeEdit = (EditText) billDetailsDialog.findViewById(R.id.offerCodeEdit);
+                    PaymentTypeEdits = (EditSpinner) billDetailsDialog.findViewById(R.id.paymentTypeEdit);
+//                    EditText OfferCodeEdit = (EditText) billDetailsDialog.findViewById(R.id.offerCodeEdit);
                     CustomerWalletText = (TextView) billDetailsDialog.findViewById(R.id.walletBalanceText);
-                    CustomerWalletEdit = (EditText) billDetailsDialog.findViewById(R.id.walletPointsEdit);
-                    final TextView cart_total = (TextView) billDetailsDialog.findViewById(R.id.cart_total);
+                    CustomerWalletEdit = (TextView) billDetailsDialog.findViewById(R.id.walletPointsEdit);
+//                    final TextView cart_total = (TextView) billDetailsDialog.findViewById(R.id.cart_total);
                     final TextView gst_total = (TextView) billDetailsDialog.findViewById(R.id.gst_total);
 
                     final LinearLayout addaddresslay = (LinearLayout) billDetailsDialog.findViewById(R.id.addaddresslay);
@@ -473,52 +467,69 @@ public class ItemInCartOffline extends AppCompatActivity {
                     addressracycler.setLayoutManager(new LinearLayoutManager(ItemInCartOffline.this));
 
 
-                    final TextView    BalanceAmount = (TextView) billDetailsDialog.findViewById(R.id.OutstandingEdit);
-                    price = (RadioButton)billDetailsDialog.findViewById(R.id.price);
-                    discount = (RadioButton)billDetailsDialog. findViewById(R.id.discount);
+                    final TextView BalanceAmount = (TextView) billDetailsDialog.findViewById(R.id.OutstandingEdit);
+                    price = (RadioButton) billDetailsDialog.findViewById(R.id.price);
+                    discount = (RadioButton) billDetailsDialog.findViewById(R.id.discount);
 
 
-                    Log.d("arraycustomerListitem","arraycustomerListitem"+TotalAmount);
-                    getCustomer();
+                    Log.d("arraycustomerListitem", "arraycustomerListitem" + TotalAmount);
+//                    getCustomer();
 
-                    final TextView after_dis=billDetailsDialog.findViewById(R.id.after_dis);
-                    final TextView after_dis_per=billDetailsDialog.findViewById(R.id.after_dis_per);
-                    final TextView sumtotal=billDetailsDialog.findViewById(R.id.sumtotal);
+                    final TextView after_dis = billDetailsDialog.findViewById(R.id.after_dis);
+                    final TextView after_dis_per = billDetailsDialog.findViewById(R.id.after_dis_per);
+                    final TextView sumtotal = billDetailsDialog.findViewById(R.id.sumtotal);
 
-                    Float total= Float.parseFloat(grandTotalText.getText().toString());
-                    cart_total.setText(""+TotalAmount);
-                    gst_total.setText(""+GstTotal);
-
+                    Float total = Float.parseFloat(grandTotalText.getText().toString());
+//                    cart_total.setText("" + TotalAmount);
+                    gst_total.setText("" + GstTotal);
+                    CustomerEdit.setAdapter(adapter);
                     addnewaddress.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             addaddresslay.setVisibility(View.VISIBLE);
                         }
                     });
-                    ArrayList<String> paymentList = new ArrayList<String>();
-                    paymentList.add("Cash");
+
+
+//                    PaymentTypeEdits.setText("Wallet");
+                    paymentList = new ArrayList<String>();
                     paymentList.add("Wallet");
-                    paymentList.add("Credit Card");
-                    paymentList.add("Debit Card");
-                    paymentList.add("NetBanking");
+                    paymentList.add("Cash");
+//                    paymentList.add("Credit Card");
+//                    paymentList.add("Debit Card");
+//                    paymentList.add("NetBanking");
+
+
                     ArrayAdapter<String> paymentAdapter = new ArrayAdapter<String>(ItemInCartOffline.this, android.R.layout.simple_spinner_dropdown_item, paymentList);
-                    PaymentTypeEdit.setAdapter(paymentAdapter);
+                    PaymentTypeEdits.setAdapter(paymentAdapter);
+
+                    PaymentTypeEdits.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            if (position == 0) {
+                                wdata = paymentList.get(position);
+                            } else if (position == 1) {
+                                cdata = paymentList.get(position);
+                            }
+                        }
+                    });
+
 
                     final CheckBox DeliveryCheck = (CheckBox) billDetailsDialog.findViewById(R.id.deliveryCheck);
                     final LinearLayout DeliveryLayout = (LinearLayout) billDetailsDialog.findViewById(R.id.deliveryLayout);
                     Button SaveBtnDialog = (Button) billDetailsDialog.findViewById(R.id.saveBtn);
 
                     DeliveryLayout.setVisibility(View.GONE);
-                    BalanceAmount.setText(""+TotalAmount);
-                    sumtotal.setText(""+TotalAmount);
+                    BalanceAmount.setText("" + TotalAmount);
+                    sumtotal.setText("" + TotalAmount);
 
                     price.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            countvac="1";
+                            countvac = "1";
                             perdiscountEdit.setVisibility(View.GONE);
                             DiscountEdit.setVisibility(View.VISIBLE);
-                            BalanceAmount.setText(""+TotalAmount);
+                            BalanceAmount.setText("" + TotalAmount);
                             DiscountEdit.setText("");
 
                         }
@@ -527,10 +538,10 @@ public class ItemInCartOffline extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
 
-                            countvac="2";
+                            countvac = "2";
                             perdiscountEdit.setVisibility(View.VISIBLE);
                             DiscountEdit.setVisibility(View.GONE);
-                            BalanceAmount.setText(""+TotalAmount);
+                            BalanceAmount.setText("" + TotalAmount);
 
                             perdiscountEdit.setText("");
                         }
@@ -543,65 +554,53 @@ public class ItemInCartOffline extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count)
-
-
-                        {
-                            if (perdiscountEdit.getText().toString().isEmpty()){
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            if (perdiscountEdit.getText().toString().isEmpty()) {
                                 after_dis.setText("0");
 
-                                Log.d("fdd","after_dis.getText().toString()"+after_dis.getText().toString());
+                                Log.d("fdd", "after_dis.getText().toString()" + after_dis.getText().toString());
                                 BalanceAmount.setText(String.valueOf(TotalAmount));
-                                sumtotal.setText(""+TotalAmount);
+                                sumtotal.setText("" + TotalAmount);
 
 
                             } else {
                                 if (Integer.valueOf(perdiscountEdit.getText().toString()) > 0) {
 
-                                    Log.d("test","price"+cart_total.getText().toString());
-                                    Float percentage=Float.valueOf(String.valueOf(TotalAmount));
-                                    Float dec=percentage/100;
-                                    Float total=dec*Float.valueOf(perdiscountEdit.getText().toString());
+//                                    Log.d("test", "price" + cart_total.getText().toString());
+                                    Float percentage = Float.valueOf(String.valueOf(TotalAmount));
+                                    Float dec = percentage / 100;
+                                    Float total = dec * Float.valueOf(perdiscountEdit.getText().toString());
 
-                                    if(Integer.valueOf(perdiscountEdit.getText().toString())>100)
-                                    {
-                                        Toast.makeText(getApplicationContext(),"Please Enter Valide Discount .",
-                                                Toast.LENGTH_SHORT).show();
+                                    if (Integer.valueOf(perdiscountEdit.getText().toString()) > 100) {
+                                        Toast.makeText(getApplicationContext(), "Please Enter Valide Discount .", Toast.LENGTH_SHORT).show();
 
-                                        perdiscountEdit.setText(perdiscountEdit.getText().toString().substring(0, perdiscountEdit.getText().toString().length()-1));
+                                        perdiscountEdit.setText(perdiscountEdit.getText().toString().substring(0, perdiscountEdit.getText().toString().length() - 1));
 
-                                    }
-                                    else {
+                                    } else {
 
                                         Float amt = Float.parseFloat(String.valueOf(TotalAmount));
-                                        Float amount=amt-total;
-                                        after_dis_per.setText(""+total);
+                                        Float amount = amt - total;
+                                        after_dis_per.setText("" + total);
 
                                         DecimalFormat df = new DecimalFormat("0.00");
-                                        double Amount= Double.parseDouble(String.valueOf((df.format(amount))));
+                                        double Amount = Double.parseDouble(String.valueOf((df.format(amount))));
 
-                                        BalanceAmount.setText(""+Amount);
-                                        sumtotal.setText(""+Amount);
+                                        BalanceAmount.setText("" + Amount);
+                                        sumtotal.setText("" + Amount);
 
                                     }
 
                                 } else {
                                     after_dis.setText("0");
 
-                                    Log.d("","after_dis"+after_dis.getText().toString());
+                                    Log.d("", "after_dis" + after_dis.getText().toString());
                                     BalanceAmount.setText(String.valueOf(Float.valueOf(TotalAmount)));
 
-                                    sumtotal.setText(""+TotalAmount);
+                                    sumtotal.setText("" + TotalAmount);
 
                                 }
-
-
                             }
-
-
-
                         }
-
 
 
                         @Override
@@ -620,34 +619,33 @@ public class ItemInCartOffline extends AppCompatActivity {
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                            if (DiscountEdit.getText().toString().isEmpty()){
+                            if (DiscountEdit.getText().toString().isEmpty()) {
                                 after_dis.setText("0");
                                 BalanceAmount.setText(String.valueOf(TotalAmount));
 
-                                sumtotal.setText(""+TotalAmount);
+                                sumtotal.setText("" + TotalAmount);
 
                             } else {
-                                if (Integer.valueOf(DiscountEdit.getText().toString()) > Float.parseFloat(String.valueOf(TotalAmount))){
+                                if (Integer.valueOf(DiscountEdit.getText().toString()) > Float.parseFloat(String.valueOf(TotalAmount))) {
                                     Toast.makeText(ItemInCartOffline.this, "Sorry Advanced Amount Can Not Be Greater than Total Amount.", Toast.LENGTH_SHORT).show();
-                                    DiscountEdit.setText(DiscountEdit.getText().toString().substring(0, DiscountEdit.getText().toString().length()-1));
+                                    DiscountEdit.setText(DiscountEdit.getText().toString().substring(0, DiscountEdit.getText().toString().length() - 1));
                                 } else {
-                                    if (Integer.valueOf(DiscountEdit.getText().toString()) >= 0){
+                                    if (Integer.valueOf(DiscountEdit.getText().toString()) >= 0) {
                                         after_dis.setText(DiscountEdit.getText().toString());
 
-                                        AfterDicount=(Float.parseFloat(String.valueOf(TotalAmount)) -
-                                                Float.parseFloat(after_dis.getText().toString()));
+                                        AfterDicount = (Float.parseFloat(String.valueOf(TotalAmount)) - Float.parseFloat(after_dis.getText().toString()));
 
                                         DecimalFormat df = new DecimalFormat("0.00");
-                                        double Amount= Double.parseDouble(String.valueOf((df.format(AfterDicount))));
+                                        double Amount = Double.parseDouble(String.valueOf((df.format(AfterDicount))));
 
-                                        BalanceAmount.setText(""+Amount);
-                                        sumtotal.setText(""+Amount);
+                                        BalanceAmount.setText("" + Amount);
+                                        sumtotal.setText("" + Amount);
 
                                     } else {
 
-                                        BalanceAmount.setText(""+(Float.valueOf(TotalAmount)));
+                                        BalanceAmount.setText("" + (Float.valueOf(TotalAmount)));
                                         after_dis.setText("0");
-                                        sumtotal.setText(""+TotalAmount);
+                                        sumtotal.setText("" + TotalAmount);
 
                                     }
                                 }
@@ -655,37 +653,32 @@ public class ItemInCartOffline extends AppCompatActivity {
                         }
 
                         @Override
-                        public void afterTextChanged(Editable s)
-                        {
+                        public void afterTextChanged(Editable s) {
 
                         }
+
                     });
 
 
-
-                DeliveryCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    DeliveryCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                            if(customerid==null|| customerid.equals("")||customerid.isEmpty())
-                            {
-                                Toast.makeText(getApplicationContext(),"Please Select Customer",Toast.LENGTH_SHORT).show();
+                            if (customerid == null || customerid.equals("") || customerid.isEmpty()) {
+                                Toast.makeText(getApplicationContext(), "Please Select Customer", Toast.LENGTH_SHORT).show();
                                 DeliveryCheck.setChecked(false);
                             }
                             else {
                                 if (isChecked) {
                                     arrayaddressListitem = dbcustomeraddress.getalladdress(customerid);
 
-                                    Log.d("","arrayaddressListitem.size()"+arrayaddressListitem.size());
-                                    if(arrayaddressListitem.size()==0)
-                                    {
-                                        Toast.makeText(getApplicationContext(),"Address Not Available",Toast.LENGTH_LONG).show();
-                                    }
-                                    else {
+                                    Log.d("", "arrayaddressListitem.size()" + arrayaddressListitem.size());
+                                    if (arrayaddressListitem.size() == 0) {
+                                        Toast.makeText(getApplicationContext(), "Address Not Available", Toast.LENGTH_LONG).show();
+                                    } else {
                                         addressracycler.setAdapter(new AddressAdapterlist());
 
                                     }
-
 
 
                                     DeliveryLayout.setVisibility(View.VISIBLE);
@@ -705,56 +698,57 @@ public class ItemInCartOffline extends AppCompatActivity {
                             CustomerStateString = CustomerState.get(position);
                             customerid = CustomerID.get(TempCust);
                             customeruniqrid = CustomerUniqe.get(TempCust);
-                          //  GetCustomerPoints(customerid);
-
+//                              GetCustomerPoints(customerid);
 
 
                         }
                     });
+
 
 //
-                    CustomerWalletEdit.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                    CustomerWalletEdit.addTextChangedListener(new TextWatcher() {
+//                        @Override
+//                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                            String dicount = null;
+//                            Log.d("", "dicount" + dicount);
+//                            if (CustomerWalletEdit.getText().toString().isEmpty()) {
+//                                BalanceAmount.setText(String.valueOf(sumtotal.getText().toString()));
+//                            } else {
+//                                Log.d("", "sumtotal" + sumtotal.getText().toString());
+//                                if (Float.valueOf(CustomerWalletEdit.getText().toString()) > Float.valueOf(BalanceAmount.getText().toString())) {
+//                                    Toast.makeText(ItemInCartOffline.this, "Sorry Advanced Amount Can Not Be Greater than Total Amount.", Toast.LENGTH_SHORT).show();
+//                                    CustomerWalletEdit.setText(CustomerWalletEdit.getText().toString().substring(0, CustomerWalletEdit.getText().toString().length() - 1));
+//                                }
+////                                else {
+////                                    if (Float.valueOf(CustomerWalletEdit.getText().toString()) >= Float.valueOf(TotalWallet)){
+////
+////                                        BalanceAmount.setText(String.valueOf(Float.valueOf(sumtotal.getText().toString()) -
+////                                                Float.valueOf(CustomerWalletEdit.getText().toString())));
+////
+////                                        Float ab =Float.valueOf(CustomerWalletText.getText().toString())-Float.valueOf(CustomerWalletEdit.getText().toString());
+////
+////                                    } else {
+////                                        BalanceAmount.setText(String.valueOf(Float.valueOf(sumtotal.getText().toString()) -
+////                                                Float.valueOf(CustomerWalletEdit.getText().toString())));
+////
+////
+////                                    }
+////                                }
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void afterTextChanged(Editable s) {
+//
+//                        }
+//                    });
 
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                            String dicount = null;
-                            Log.d("","dicount"+dicount);
-                            if (CustomerWalletEdit.getText().toString().isEmpty()){
-                                BalanceAmount.setText(String.valueOf(sumtotal.getText().toString()));
-                            } else {
-                                Log.d("","sumtotal"+sumtotal.getText().toString());
-                                if (Float.valueOf(CustomerWalletEdit.getText().toString()) > Float.valueOf(BalanceAmount.getText().toString())){
-                                    Toast.makeText(ItemInCartOffline.this, "Sorry Advanced Amount Can Not Be Greater than Total Amount.", Toast.LENGTH_SHORT).show();
-                                    CustomerWalletEdit.setText(CustomerWalletEdit.getText().toString().substring(0, CustomerWalletEdit.getText().toString().length()-1));
-                                } else {
-                                    if (Float.valueOf(CustomerWalletEdit.getText().toString()) >= Float.valueOf(TotalWallet)){
-
-                                        BalanceAmount.setText(String.valueOf(Float.valueOf(sumtotal.getText().toString()) -
-                                                Float.valueOf(CustomerWalletEdit.getText().toString())));
-
-                                        Float ab =Float.valueOf(CustomerWalletText.getText().toString())-Float.valueOf(CustomerWalletEdit.getText().toString());
-
-                                    } else {
-                                        BalanceAmount.setText(String.valueOf(Float.valueOf(sumtotal.getText().toString()) -
-                                                Float.valueOf(CustomerWalletEdit.getText().toString())));
-
-
-                                    }
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable s)
-                        {
-
-                        }
-                    });
-
+                    CustomerWalletEdit.setText(BalanceAmount.getText().toString());
                     addnewaddress.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -769,7 +763,7 @@ public class ItemInCartOffline extends AppCompatActivity {
                             CustomerStateEdit = (Spinner) customDialogAddCustomer.findViewById(R.id.customerStateEdit);
                             final EditText CustomerPincodeEdit = (EditText) customDialogAddCustomer.findViewById(R.id.customerPincodeEdit);
                             final Button SaveBtn = (Button) customDialogAddCustomer.findViewById(R.id.saveCustomerBtn);
-                            final  LinearLayout addresslayout=customDialogAddCustomer.findViewById(R.id.addresslayout);
+                            final LinearLayout addresslayout = customDialogAddCustomer.findViewById(R.id.addresslayout);
                             addresslayout.setVisibility(View.VISIBLE);
                             CustomerStateEdit.setAdapter(StateAdapter);
 
@@ -777,7 +771,7 @@ public class ItemInCartOffline extends AppCompatActivity {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     SelectedStatecode = (Addstatecode.get(position));//This will be the student id.
-                                    SelectedStateName=Addstatename.get(position);
+                                    SelectedStateName = Addstatename.get(position);
                                 }
 
                                 @Override
@@ -794,11 +788,11 @@ public class ItemInCartOffline extends AppCompatActivity {
                                         Toast.makeText(ItemInCartOffline.this, "Customer Name Not Entered.", Toast.LENGTH_SHORT).show();
                                     } else if (CustomerMobileEdit.getText().toString().isEmpty()) {
                                         Toast.makeText(ItemInCartOffline.this, "Customer Mobile Not Entered.", Toast.LENGTH_SHORT).show();
-                                    } else if (CustomerMobileEdit.getText().toString().length()<10) {
+                                    } else if (CustomerMobileEdit.getText().toString().length() < 10) {
                                         Toast.makeText(ItemInCartOffline.this, "Please Enter Proper No.", Toast.LENGTH_SHORT).show();
-                                    }else if (CustomerMobileEdit.getText().toString().length()<10) {
+                                    } else if (CustomerMobileEdit.getText().toString().length() < 10) {
                                         Toast.makeText(ItemInCartOffline.this, "Please Enter Proper No.", Toast.LENGTH_SHORT).show();
-                                    }else if (CustomerAddressEdit.getText().toString().isEmpty()) {
+                                    } else if (CustomerAddressEdit.getText().toString().isEmpty()) {
                                         Toast.makeText(ItemInCartOffline.this, "Customer Address Not Entered.", Toast.LENGTH_SHORT).show();
                                     } else if (CustomerNearAreaEdit.getText().toString().isEmpty()) {
                                         Toast.makeText(ItemInCartOffline.this, "Customer Near Area Not Entered.", Toast.LENGTH_SHORT).show();
@@ -811,20 +805,22 @@ public class ItemInCartOffline extends AppCompatActivity {
                                     } else {
                                         if (CustomerEmailEdit.getText().toString().isEmpty()) {
 
-                                                AllCustomerAddressModel recordingItem = new AllCustomerAddressModel(CustomerCityEdit.getText().toString(),customerid,CustomerPincodeEdit.getText().toString(),CustomerNearAreaEdit.getText().toString(),CustomerNameEdit.getText().toString(),CustomerEmailEdit.getText().toString(),"","",CustomerAddressEdit.getText().toString(),SelectedStateName,CustomerMobileEdit.getText().toString(),SelectedStatecode,"0",customeruniqrid);
+                                            AllCustomerAddressModel recordingItem = new AllCustomerAddressModel(CustomerCityEdit.getText().toString(), customerid, CustomerPincodeEdit.getText().toString(), CustomerNearAreaEdit.getText().toString(), CustomerNameEdit.getText().toString(), CustomerEmailEdit.getText().toString(), "", "", CustomerAddressEdit.getText().toString(), SelectedStateName, CustomerMobileEdit.getText().toString(), SelectedStatecode, "0", customeruniqrid);
                                             dbcustomeraddress.addaddress(recordingItem);
 
                                            /* arrayaddressListitem = dbcustomeraddress.getalladdress(customerid);
                                             addressracycler.setAdapter(new AddressAdapterlist());
-                                           */ customDialogAddCustomer.cancel();
+                                           */
+                                            customDialogAddCustomer.cancel();
                                         } else {
 
-                                            AllCustomerAddressModel recordingItem = new AllCustomerAddressModel(CustomerCityEdit.getText().toString(),customerid,CustomerPincodeEdit.getText().toString(),CustomerNearAreaEdit.getText().toString(),CustomerNameEdit.getText().toString(),CustomerEmailEdit.getText().toString(),"","",CustomerAddressEdit.getText().toString(),SelectedStateName,CustomerMobileEdit.getText().toString(),SelectedStatecode,"0",customeruniqrid);
+                                            AllCustomerAddressModel recordingItem = new AllCustomerAddressModel(CustomerCityEdit.getText().toString(), customerid, CustomerPincodeEdit.getText().toString(), CustomerNearAreaEdit.getText().toString(), CustomerNameEdit.getText().toString(), CustomerEmailEdit.getText().toString(), "", "", CustomerAddressEdit.getText().toString(), SelectedStateName, CustomerMobileEdit.getText().toString(), SelectedStatecode, "0", customeruniqrid);
                                             dbcustomeraddress.addaddress(recordingItem);
 
                                           /*  arrayaddressListitem = dbcustomeraddress.getalladdress(customerid);
                                             addressracycler.setAdapter(new AddressAdapterlist());
-                                          */  customDialogAddCustomer.cancel();
+                                          */
+                                            customDialogAddCustomer.cancel();
                                         }
                                     }
                                 }
@@ -834,73 +830,290 @@ public class ItemInCartOffline extends AppCompatActivity {
                     });
 
 
-                    SaveBtnDialog.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                    if (!isOnline()) {
+                        SaveBtnDialog.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
-                            if (CustomerEdit.getText().toString().isEmpty()) {
-                                Toast.makeText(ItemInCartOffline.this, "Please Enter Customer Name.", Toast.LENGTH_SHORT).show();
-                            } else if (PaymentTypeEdit.getText().toString().isEmpty()) {
-                                Toast.makeText(ItemInCartOffline.this, "Please Select Payment Type.", Toast.LENGTH_SHORT).show();
-                            } else
-                                {
+
+                                if (CustomerEdit.getText().toString().isEmpty()) {
+                                    Toast.makeText(ItemInCartOffline.this, "Please Enter Customer Name.", Toast.LENGTH_SHORT).show();
+                                } else if (PaymentTypeEdits.getText().toString().isEmpty()) {
+                                    Toast.makeText(ItemInCartOffline.this, "Please Select Payment Type.", Toast.LENGTH_SHORT).show();
+                                } else {
 
                                     {
 
 
-
-
-
-                                        Log.d("","CartCGSTAmountsss "+CartCGSTAmount);
+                                        Log.d("", "CartCGSTAmountsss " + CartCGSTAmount);
 
                                         Intent productBillIntent = new Intent(ItemInCartOffline.this, BillPage.class);
-                                            productBillIntent.putExtra("CustomerName", CustomerEdit.getText().toString());
-                                            productBillIntent.putExtra("customerid", customerid);
-                                            productBillIntent.putExtra("cartid", CartID);
-                                            productBillIntent.putExtra("Productid", CartProductID);
-                                            productBillIntent.putExtra("Products", CartProductName);
-                                            productBillIntent.putExtra("Prices", CartProductPrice);
-                                            productBillIntent.putExtra("Quantity", CartProductQuan);
-                                            productBillIntent.putExtra("Amount", CartUnitTotal);
-                                            productBillIntent.putExtra("SubTotal", subtotal);
-                                            productBillIntent.putExtra("SGST", String.valueOf(CartSGSTAmount));
-                                            productBillIntent.putExtra("IGST", String.valueOf(CartIGSTAmount));
-                                            productBillIntent.putExtra("CGST", String.valueOf(CartCGSTAmount));
-                                            productBillIntent.putExtra("GSTTYPE", GstType);
-                                            productBillIntent.putExtra("packsize", CArtPAckSize);
-                                            productBillIntent.putExtra("color", CartColor);
-                                            productBillIntent.putExtra("size", CartSize);
-                                            productBillIntent.putExtra("unit", CartpackUnit);
-                                            productBillIntent.putExtra("Payment", PaymentTypeEdit.getText().toString());
-                                            productBillIntent.putExtra("TotalAmount", String.valueOf(TotalAmount));
-                                            productBillIntent.putExtra("CustomerState", CustomerStateString);
-                                            productBillIntent.putExtra("CustomerAddress", SeletedAddress);
-                                            productBillIntent.putExtra("dicount_type", countvac);
-                                            productBillIntent.putExtra("balanceamt", BalanceAmount.getText().toString());
-                                            productBillIntent.putExtra("walletbalance", CustomerWalletEdit.getText().toString());
+                                        productBillIntent.putExtra("CustomerName", CustomerEdit.getText().toString());
+                                        productBillIntent.putExtra("customerid", customerid);
+                                        productBillIntent.putExtra("cartid", CartID);
+                                        productBillIntent.putExtra("Productid", CartProductID);
+                                        productBillIntent.putExtra("Products", CartProductName);
+                                        productBillIntent.putExtra("Prices", CartProductPrice);
+                                        productBillIntent.putExtra("Quantity", CartProductQuan);
+                                        productBillIntent.putExtra("Amount", CartUnitTotal);
+                                        productBillIntent.putExtra("SubTotal", subtotal);
+                                        productBillIntent.putExtra("SGST", String.valueOf(CartSGSTAmount));
+                                        productBillIntent.putExtra("IGST", String.valueOf(CartIGSTAmount));
+                                        productBillIntent.putExtra("CGST", String.valueOf(CartCGSTAmount));
+                                        productBillIntent.putExtra("GSTTYPE", GstType);
+                                        productBillIntent.putExtra("packsize", CArtPAckSize);
+                                        productBillIntent.putExtra("color", CartColor);
+                                        productBillIntent.putExtra("size", CartSize);
+                                        productBillIntent.putExtra("unit", CartpackUnit);
+                                        productBillIntent.putExtra("Payment", PaymentTypeEdits.getText().toString());
+                                        productBillIntent.putExtra("TotalAmount", String.valueOf(TotalAmount));
+                                        productBillIntent.putExtra("CustomerState", CustomerStateString);
+                                        productBillIntent.putExtra("CustomerAddress", SeletedAddress);
+                                        productBillIntent.putExtra("dicount_type", countvac);
+                                        productBillIntent.putExtra("balanceamt", BalanceAmount.getText().toString());
+                                        productBillIntent.putExtra("walletbalance", CustomerWalletEdit.getText().toString());
 
-                                            if(countvac.equals("1"))
-                                            {
-                                                productBillIntent.putExtra("dicount", DiscountEdit.getText().toString());
 
-                                            }
-                                            else if(countvac.equals("2"))
-                                            {
-                                                productBillIntent.putExtra("dicount", after_dis_per.getText().toString());
+                                        if (countvac.equals("1")) {
+                                            productBillIntent.putExtra("dicount", DiscountEdit.getText().toString());
 
-                                            }
-                                            else {
-                                                productBillIntent.putExtra("dicount", "0");
+                                        } else if (countvac.equals("2")) {
+                                            productBillIntent.putExtra("dicount", after_dis_per.getText().toString());
 
-                                            }
-
-                                            startActivity(productBillIntent);
-                                            finish();
+                                        } else {
+                                            productBillIntent.putExtra("dicount", "0");
 
                                         }
+
+                                        startActivity(productBillIntent);
+                                        finish();
+
+                                    }
+                                }
+
+
                             }
-                        }
-                    });
+                        });
+                    } else {
+
+
+                        AddCustomerText.setVisibility(View.GONE);
+                        DeliveryCheck.setVisibility(View.GONE);
+                        addnewaddress.setVisibility(View.GONE);
+                        addressracycler.setVisibility(View.GONE);
+//                        PaymentTypeEdit.setText("Wallet");
+
+                        SharedPreferences userdatas = getSharedPreferences("userdata", MODE_PRIVATE);
+                        String unamesdata = userdatas.getString("usernames", "");
+                        String userid = userdatas.getString("op_user_id", "");
+                        String contactn = userdatas.getString("contact", "");
+                        String address = userdatas.getString("addressno", "");
+                        ArrayList<String> username = new ArrayList<>();
+
+
+//                        CustomerEdit.setText(unamesdata+ contactn);
+
+
+                        userdata = new ArrayList<>();
+                        userId = new ArrayList<>();
+//                        requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+                        final String url = "http://microlanpos.com/demo/api2/getUserData";
+                        // prepare the Request
+                        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                //  progressDialog.cancel();
+                                System.out.print(response.toString());
+
+                                try {
+                                    String stat = response.getString("status");
+                                    if (stat.equals("1")) {
+                                        JSONArray details = response.getJSONArray("user_details");
+                                        Log.d("", "details" + details);
+                                        for (int i = 0; i < details.length(); i++) {
+                                            JSONObject jsonObject = details.getJSONObject(i);
+                                            String op_user_id = jsonObject.getString("op_user_id");
+                                            String user_id = jsonObject.getString("user_id");
+                                            String user_name = jsonObject.getString("user_name");
+                                            String email_address = jsonObject.getString("email");
+                                            String password = jsonObject.getString("password");
+                                            String mobile_number = jsonObject.getString("contact_no");
+                                            String role_id = jsonObject.getString("role_id");
+                                            String map_with = jsonObject.getString("map_with");
+                                            String map_with_id = jsonObject.getString("map_with_id");
+                                            String profile_pic = jsonObject.getString("profile_photo");
+                                            String aadhar_no = jsonObject.getString("aadhar_no");
+                                            String pan_no = jsonObject.getString("pan_no");
+                                            String phone_no = jsonObject.getString("phone_no");
+                                            String address = jsonObject.getString("address");
+
+
+                                            userdata.add(user_name);
+                                            userId.add(user_name + "," + op_user_id);
+
+
+                                            //Toast.makeText(MainActivity.this, op_user_id, Toast.LENGTH_SHORT).show();
+
+                                        }
+
+                                        adapters = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, userdata);
+                                        CustomerEdit.setAdapter(adapters);
+                                        //cut and paste the data
+                                        GetCustomerPoints(userId.get(0).split(",")[0].trim());
+                                        CustomerEdit.setOnItemClickListener((parent, view, position, id) -> {
+                                            for (int i = 0; i < userId.size(); i++) {
+                                                if (userId.get(i).split(",")[0].trim().equalsIgnoreCase(parent.getItemAtPosition(position).toString())) {
+                                                    GetCustomerPoints(userId.get(i).split(",")[1].trim());
+                                                    //binding.mobn.setText("Wallet Balance : " + userandPoints.get(i).getPoints());
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        Log.d("TAG", "customerpointserror");
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                System.out.print("Error.Response");
+
+                                //   progressDialog.cancel();
+
+                            }
+                        });
+
+
+                        requestQueue.add(getRequest);
+
+
+//                        BalanceAmount.setText(sumtotal.getText().toString()-CustomerWalletEdit.getText().toString();
+//
+//                                        Float ab =Float.valueOf(CustomerWalletText.getText().toString())-Float.valueOf(CustomerWalletEdit.getText().toString());
+//
+
+//                        Toast.makeText(ItemInCartOffline.this, "user online", Toast.LENGTH_SHORT).show();
+
+                        SaveBtnDialog.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+
+                                if (CustomerEdit.getText().toString().isEmpty()) {
+                                    Toast.makeText(ItemInCartOffline.this, "Please Enter Customer Name.", Toast.LENGTH_SHORT).show();
+                                } else if (PaymentTypeEdits.getText().toString().isEmpty()) {
+                                    Toast.makeText(ItemInCartOffline.this, "Please Select Payment Type.", Toast.LENGTH_SHORT).show();
+                                } else if (CustomerWalletText.getText().toString() == BalanceAmount.getText().toString()) {
+                                    Toast.makeText(ItemInCartOffline.this, "data get successfully", Toast.LENGTH_SHORT).show();
+
+                                } else {
+
+                                    {
+
+                                        SharedPreferences userdata = getSharedPreferences("walletdata", MODE_PRIVATE);
+                                        String walletamount = userdata.getString("wallet", "");
+
+                                        Log.d("", "CartCGSTAmountsss " + CartCGSTAmount);
+
+                                        Intent productBillIntent = new Intent(ItemInCartOffline.this, BillPage.class);
+                                        productBillIntent.putExtra("CustomerName", CustomerEdit.getText().toString());
+                                        productBillIntent.putExtra("customerid", userid);
+                                        productBillIntent.putExtra("cartid", CartID);
+                                        productBillIntent.putExtra("Productid", CartProductID);
+                                        productBillIntent.putExtra("Products", CartProductName);
+                                        productBillIntent.putExtra("Prices", CartProductPrice);
+                                        productBillIntent.putExtra("Quantity", CartProductQuan);
+                                        productBillIntent.putExtra("Amount", CartUnitTotal);
+                                        productBillIntent.putExtra("SubTotal", subtotal);
+                                        productBillIntent.putExtra("SGST", String.valueOf(CartSGSTAmount));
+                                        productBillIntent.putExtra("IGST", String.valueOf(CartIGSTAmount));
+                                        productBillIntent.putExtra("CGST", String.valueOf(CartCGSTAmount));
+                                        productBillIntent.putExtra("GSTTYPE", GstType);
+                                        productBillIntent.putExtra("packsize", CArtPAckSize);
+                                        productBillIntent.putExtra("color", CartColor);
+                                        productBillIntent.putExtra("size", CartSize);
+                                        productBillIntent.putExtra("unit", CartpackUnit);
+                                        productBillIntent.putExtra("Payment", PaymentTypeEdits.getText().toString());
+                                        productBillIntent.putExtra("TotalAmount", String.valueOf(TotalAmount));
+                                        productBillIntent.putExtra("CustomerState", CustomerStateString);
+                                        productBillIntent.putExtra("CustomerAddress", address);
+                                        productBillIntent.putExtra("dicount_type", countvac);
+                                        productBillIntent.putExtra("balanceamt", BalanceAmount.getText().toString());
+                                        productBillIntent.putExtra("walletbalance", CustomerWalletEdit.getText().toString());
+
+
+                                        if (countvac.equals("1")) {
+                                            productBillIntent.putExtra("dicount", DiscountEdit.getText().toString());
+
+                                        } else if (countvac.equals("2")) {
+                                            productBillIntent.putExtra("dicount", after_dis_per.getText().toString());
+
+                                        } else {
+                                            productBillIntent.putExtra("dicount", "0");
+
+                                        }
+
+
+
+
+
+                                        dialog = new Dialog(ItemInCartOffline.this);
+
+                                        dialog.setContentView(R.layout.walertdialog);
+                                        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                        dialog.setCancelable(false);
+                                        dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+                                        float balance = Float.parseFloat(BalanceAmount.getText().toString());
+                                        int wallet = Integer.parseInt(CustomerWalletText.getText().toString());
+                                        if (cdata == "Cash") {
+                                            dialog.dismiss();
+                                            startActivity(productBillIntent);
+                                            finish();
+                                        } else if (wdata == "Wallet") {
+                                            if (wallet < balance) {
+
+                                                TextView cancel = dialog.findViewById(R.id.cancel);
+                                                TextView wamounts = dialog.findViewById(R.id.wamounts);
+
+                                                wamounts.setText("Wallet Amount:" + wallet);
+                                                cancel.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View v) {
+                                                        dialog.dismiss();
+                                                    }
+                                                });
+
+
+                                                dialog.show();
+
+                                            } else {
+                                                startActivity(productBillIntent);
+                                                finish();
+//                                            Toast.makeText(ItemInCartOffline.this, "gereate than number", Toast.LENGTH_SHORT).show();
+                                            }
+                                        } else {
+                                            Log.d("TAG", "condition error");
+                                        }
+
+
+                                    }
+                                }
+
+
+                            }
+                        });
+
+//                        SharedPreferences wsh = getSharedPreferences("wallpref", MODE_PRIVATE);
+//                        String wamout = wsh.getString("walleamout", "");
+//                        Toast.makeText(ItemInCartOffline.this, wamout, Toast.LENGTH_SHORT).show();
+
+                    }
+
 
                     AddCustomerText.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -925,7 +1138,7 @@ public class ItemInCartOffline extends AppCompatActivity {
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     SelectedStatecode = (Addstatecode.get(position));//This will be the student id.
                                     SelectedStateName = Addstatename.get(position);
-                                    Log.d("","State code ids "+SelectedStatecode);
+                                    Log.d("", "State code ids " + SelectedStatecode);
                                 }
 
                                 @Override
@@ -954,23 +1167,23 @@ public class ItemInCartOffline extends AppCompatActivity {
                                     }*/ else {
                                         DateFormat df = new SimpleDateFormat("HmsdMy", Locale.getDefault());
                                         String currentDateAndTime = df.format(new Date());
-                                        Log.d("dates","currentTime"+currentDateAndTime);
+                                        Log.d("dates", "currentTime" + currentDateAndTime);
 
-                                        String uniqeid=UserID+currentDateAndTime;
+                                        String uniqeid = UserID + currentDateAndTime;
 
                                         if (CustomerEmailEdit.getText().toString().isEmpty()) {
 
 
-                                            ALLCustomerModel recordingItem = new ALLCustomerModel(CustomerNameEdit.getText().toString(),CustomerMobileEdit.getText().toString(),CustomerEmailEdit.getText().toString(),CustomerAddressEdit.getText().toString(),CustomerNearAreaEdit.getText().toString(),CustomerCityEdit.getText().toString(),SelectedStateName,CustomerPincodeEdit.getText().toString(),SelectedStatecode,"0",uniqeid);
+                                            ALLCustomerModel recordingItem = new ALLCustomerModel(CustomerNameEdit.getText().toString(), CustomerMobileEdit.getText().toString(), CustomerEmailEdit.getText().toString(), CustomerAddressEdit.getText().toString(), CustomerNearAreaEdit.getText().toString(), CustomerCityEdit.getText().toString(), SelectedStateName, CustomerPincodeEdit.getText().toString(), SelectedStatecode, "0", uniqeid);
                                             dbAddCustomer.addcustomer(recordingItem);
 
-                                            getCustomer();
+//                                        getCustomer();
                                             customDialogAddCustomer.cancel();
                                         } else {
-                                            ALLCustomerModel recordingItem = new ALLCustomerModel(CustomerNameEdit.getText().toString(),CustomerMobileEdit.getText().toString(),"",CustomerAddressEdit.getText().toString(),CustomerNearAreaEdit.getText().toString(),CustomerCityEdit.getText().toString(),SelectedStateName,CustomerPincodeEdit.getText().toString(),SelectedStatecode,"0",uniqeid);
+                                            ALLCustomerModel recordingItem = new ALLCustomerModel(CustomerNameEdit.getText().toString(), CustomerMobileEdit.getText().toString(), "", CustomerAddressEdit.getText().toString(), CustomerNearAreaEdit.getText().toString(), CustomerCityEdit.getText().toString(), SelectedStateName, CustomerPincodeEdit.getText().toString(), SelectedStatecode, "0", uniqeid);
                                             dbAddCustomer.addcustomer(recordingItem);
 
-                                            getCustomer();
+//                                        getCustomer();
 
                                             customDialogAddCustomer.cancel();
                                         }
@@ -985,7 +1198,7 @@ public class ItemInCartOffline extends AppCompatActivity {
 
                 }
 
-                }
+            }
         });
 
     }
@@ -993,17 +1206,15 @@ public class ItemInCartOffline extends AppCompatActivity {
     private void getstate() {
 
 
-        for(int i = 0;i<arraystatecode.size();i++) {
+        for (int i = 0; i < arraystatecode.size(); i++) {
             String name = arraystatecode.get(i).getState();
             String id = arraystatecode.get(i).getStatecode();
 
             Addstatename.add(name);
-            Addstatecode .add(id);
+            Addstatecode.add(id);
 
 
             StateAdapter = new ArrayAdapter<String>(ItemInCartOffline.this, android.R.layout.simple_spinner_dropdown_item, Addstatename);
-
-
 
 
         }
@@ -1013,15 +1224,14 @@ public class ItemInCartOffline extends AppCompatActivity {
 
     private void GetAllstate() {
 
-        for(int i=0;i<StateCode.size();i++)
-        {
+        for (int i = 0; i < StateCode.size(); i++) {
 
-            String ab=StateCode.get(i);
-            String ac=StatesList.get(i);
-            Log.d("","State code"+ab);
-            Log.d("","State code"+ac);
+            String ab = StateCode.get(i);
+            String ac = StatesList.get(i);
+            Log.d("", "State code" + ab);
+            Log.d("", "State code" + ac);
 
-            StateModel recordingItem = new StateModel( ac,ab);
+            StateModel recordingItem = new StateModel(ac, ab);
 
             addstate.addstate(recordingItem);
 
@@ -1031,35 +1241,35 @@ public class ItemInCartOffline extends AppCompatActivity {
     }
 
 
+    public void GetCustomerPoints(String UserIDs) {
 
-    public void GetCustomerPoints(final String UserIDs) {
-        progressDialog = new ProgressDialog(ItemInCartOffline.this);
-        progressDialog.setMessage("Loading...");
-        progressDialog.setCancelable(false);
-        //progressDialog.setMax(100);
-        progressDialog.show();
 
         //Toast.makeText(ItemInCart.this, CategoryID, Toast.LENGTH_SHORT).show();
-
         String insertUrl = "http://microlanpos.com/demo/api2/wallet_balance";
         StringRequest request = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progressDialog.cancel();
+
                 System.out.println(response);
                 String finalResponse = response.substring(1);
                 System.out.println(finalResponse);
-                TotalWallet=response;
+                String TotalWallet = response;
+                CustomerWalletText.setText(response);
 
-                Log.d("sfdfdf", "Wallet Balance" + response);
-                CustomerWalletText.setText("Wallet Balance : " + response);
+//                Toast.makeText(ItemInCartOffline.this, response, Toast.LENGTH_SHORT).show();
+
+                SharedPreferences sharedPreferences = getSharedPreferences("walletdata", MODE_PRIVATE);
+                SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+                myEdit.putString("wallet", response);
+                myEdit.apply();
 
             }
 
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ItemInCartOffline.this, error.toString(), Toast.LENGTH_SHORT).show();
+                Log.d("LOG", error.getLocalizedMessage());
                 System.out.print(error.toString());
             }
         }) {
@@ -1068,63 +1278,14 @@ public class ItemInCartOffline extends AppCompatActivity {
 
                 Map<String, String> parameters = new HashMap<String, String>();
                 parameters.put("user_id", UserIDs);
-                Log.d("fddfdf","UserIDs"+UserIDs);
+                Log.d("fddfdf", "UserIDs" + UserIDs);
                 return parameters;
             }
         };
 
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                5000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         requestQueue.add(request);
-    }
-
-
-
-
-    private void getCustomer() {
-
-        arraycustomerListitem = dbAddCustomer.getallcustomer();
-
-        Log.d("","arraycustomerListitem"+arraycustomerListitem.size());
-        CustomerID.clear();
-        CustomerName.clear();
-        CustomerAddress.clear();
-        CustomerState.clear();
-        CustomerUniqe.clear();
-
-        for (int i = 0; i < arraycustomerListitem.size(); i++) {
-
-                String customerIDString = arraycustomerListitem.get(i).getCustomerid();
-                String customerNameString = arraycustomerListitem.get(i).getCustomername();
-                String customerAddress1String = arraycustomerListitem.get(i).getAddress1();
-                String customerAddress2String = arraycustomerListitem.get(i).getAddress2();
-                String customerCityString = arraycustomerListitem.get(i).getCity();
-                String customerMobileString = arraycustomerListitem.get(i).getCustomernumber();
-                String customerStateString = arraycustomerListitem.get(i).getState();
-                String customerPencodeString = arraycustomerListitem.get(i).getPincode();
-                String flags = arraycustomerListitem.get(i).getFlag();
-                String uniqe = arraycustomerListitem.get(i).getUniqeid();
-
-
-                CustomerID.add(customerIDString );
-                CustomerUniqe.add(uniqe);
-                CustomerName.add(customerNameString + " ( " + customerMobileString + " ) ");
-                CustomerAddress.add(customerAddress1String + ", " + customerAddress2String + ", " + customerCityString);
-                CustomerState.add(customerStateString +"  ,  "+customerPencodeString);
-
-
-
-            }
-        Log.d("","CustomerName"+CustomerName.size());
-
-            ArrayAdapter<String> customerAdapter = new ArrayAdapter<String>(ItemInCartOffline.this, android.R.layout.simple_spinner_dropdown_item, CustomerName);
-            //customerAdapter.notifyDataSetChanged();
-            CustomerEdit.setAdapter(customerAdapter);
-
-
     }
 
 
@@ -1175,49 +1336,45 @@ public class ItemInCartOffline extends AppCompatActivity {
                 CartSize.add(product_size);
                 CartColor.add(product_color);
                 CartpackUnit.add(pacK_unit);
-                if(code.equals(""))
-                {
+                if (code.equals("")) {
                     CartProductcode.add("1");
 
-                }
-                else {
+                } else {
                     CartProductcode.add(code);
 
                 }
 
 
-              }
+            }
 
-            sum=Float.valueOf(String.valueOf(0.0));
-            for(int i=0;i<CartUnitTotal.size();i++){
-                float add= Float.parseFloat(CartUnitTotal.get(i));
+            sum = Float.valueOf(String.valueOf(0.0));
+            for (int i = 0; i < CartUnitTotal.size(); i++) {
+                float add = Float.parseFloat(CartUnitTotal.get(i));
 
-                Log.d("","add"+add);
+                Log.d("", "add" + add);
 
-                Log.d("0000","TotalAmounts "+Float.parseFloat(String.valueOf(sum+add)));
-                sum= Float.parseFloat(String.valueOf(sum+add));
-                Log.d("","adddd"+TotalAmount);
+                Log.d("0000", "TotalAmounts " + Float.parseFloat(String.valueOf(sum + add)));
+                sum = Float.parseFloat(String.valueOf(sum + add));
+                Log.d("", "adddd" + TotalAmount);
 
 
             }
 
-            TotalAmount=sum;
-            if(CartUnitTotal.size()==0)
-            {
+            TotalAmount = sum;
+            if (CartUnitTotal.size() == 0) {
                 grandTotalText.setText("0.0");
 
-            }
-            else {
-                grandTotalText.setText(""+TotalAmount);
+            } else {
+                grandTotalText.setText("" + TotalAmount);
 
             }
 
 
-            Log.d("","TotalAmount"+TotalAmount);
-            Log.d("","TotalAmount"+CartUnitTotal);
+            Log.d("", "TotalAmount" + TotalAmount);
+            Log.d("", "TotalAmount" + CartUnitTotal);
 
 
-            counterProductRecyclerAdapter = new CounterProductRecyclerAdapter(ItemInCartOffline.this, CartID, CartProductID, CartProductName, CartProductImage, CartProductQuan, CArtPAckSize, Cartprice, CartpackUnit,UserID,CartUnitTotal,CartProductcode);
+            counterProductRecyclerAdapter = new CounterProductRecyclerAdapter(ItemInCartOffline.this, CartID, CartProductID, CartProductName, CartProductImage, CartProductQuan, CArtPAckSize, Cartprice, CartpackUnit, UserID, CartUnitTotal, CartProductcode);
             LinearLayoutManager MyLayoutManager = new LinearLayoutManager(ItemInCartOffline.this);
             ProductsInCounterGrid.setHasFixedSize(true);
             ProductsInCounterGrid.setLayoutManager(MyLayoutManager);
@@ -1229,17 +1386,17 @@ public class ItemInCartOffline extends AppCompatActivity {
 
     private class AddressAdapterlist extends RecyclerView.Adapter<AddressAdapterlist.MyViewHolder> {
 
-        private int selectedItem=-1;
+        private int selectedItem = -1;
 
         @NonNull
         @Override
-        public AddressAdapterlist.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(ItemInCartOffline.this).inflate(R.layout.single_grid_item_addresses, parent, false);
-            return new AddressAdapterlist.MyViewHolder(itemView);
+            return new MyViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull AddressAdapterlist.MyViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
             final AllCustomerAddressModel item = arrayaddressListitem.get(position);
             holder.AddressText.setText(" " + item.getAddress1() + "  " + item.getAddress2());
             holder.city.setText(item.getTownCity());
@@ -1250,8 +1407,7 @@ public class ItemInCartOffline extends AppCompatActivity {
 
             if (selectedItem == position) {
                 holder.addresslay.setBackgroundResource((R.color.colorAccent));
-            }
-            else {
+            } else {
                 //  myViewHolder.sizelay.setBackgroundResource((R.color.grey));
 
             }
@@ -1265,8 +1421,8 @@ public class ItemInCartOffline extends AppCompatActivity {
                     notifyItemChanged(previousItem);
                     notifyItemChanged(position);
 
-                    HascodeStatecode=item.getStateCode();
-                    SeletedAddress=item.getAddress1() + "   " + item.getAddress2()+"   "+item.getTownCity()+"  "+item.getState()+"   "+item.getPincode();
+                    HascodeStatecode = item.getStateCode();
+                    SeletedAddress = item.getAddress1() + "   " + item.getAddress2() + "   " + item.getTownCity() + "  " + item.getState() + "   " + item.getPincode();
                 }
             });
 
@@ -1293,18 +1449,34 @@ public class ItemInCartOffline extends AppCompatActivity {
                 select_address = (TextView) gridView.findViewById(R.id.select_address);
                 AddressPincodeText = (TextView) gridView.findViewById(R.id.pincodeText);
                 CancelImage = (ImageView) gridView.findViewById(R.id.deleteImage);
-                addresslay=gridView.findViewById(R.id.addresslay);
+                addresslay = gridView.findViewById(R.id.addresslay);
             }
         }
+
     }
+
+
+    protected boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
 
-        Intent intent=new Intent(getApplicationContext(),OfflineCounter.class);
+        Intent intent = new Intent(getApplicationContext(), OfflineCounter.class);
         startActivity(intent);
         finish();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

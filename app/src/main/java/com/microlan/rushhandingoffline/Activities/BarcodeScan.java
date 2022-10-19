@@ -95,7 +95,7 @@ public class BarcodeScan extends AppCompatActivity /*implements BarcodeReader.Ba
      /*   Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
      */   setContentView(R.layout.activity_barcode_scan);
-     //   getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         sharedPreferences = getSharedPreferences("myPref", MODE_PRIVATE);
         Intro = sharedPreferences.getString("Intro", encrypt("No"));
@@ -137,6 +137,7 @@ public class BarcodeScan extends AppCompatActivity /*implements BarcodeReader.Ba
                 finish();
             }
         });
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,11 +160,12 @@ public class BarcodeScan extends AppCompatActivity /*implements BarcodeReader.Ba
         });
 
 
-
+//my comment
         initialiseDetectorsAndSources();
 
 
     }
+
 
 
     private void addproducttocart() {
@@ -237,67 +239,69 @@ public class BarcodeScan extends AppCompatActivity /*implements BarcodeReader.Ba
 
 
 
-/*
-  */
+
   private void initialiseDetectorsAndSources() {
 
-        Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
-        barcodeDetector = new BarcodeDetector.Builder(this)
-                .setBarcodeFormats(Barcode.ALL_FORMATS)
-                .build();
+        try {
+            Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
+            barcodeDetector = new BarcodeDetector.Builder(BarcodeScan.this)
+                    .setBarcodeFormats(Barcode.ALL_FORMATS)
+                    .build();
 
-        cameraSource = new CameraSource.Builder(this, barcodeDetector)
-                .setRequestedPreviewSize(1920, 1080)
-                .setAutoFocusEnabled(true) //you should add this feature
-                .build();
 
-        surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                try {
-                    if (ActivityCompat.checkSelfPermission(BarcodeScan.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
 
-                        cameraSource.start(surfaceView.getHolder());
-                    } else {
-                        ActivityCompat.requestPermissions(BarcodeScan.this, new
-                                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+            cameraSource = new CameraSource.Builder(this, barcodeDetector)
+                    .setRequestedPreviewSize(1920, 1080)
+                    .setAutoFocusEnabled(true) //you should add this feature
+                    .build();
+
+            surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+                @Override
+                public void surfaceCreated(SurfaceHolder holder) {
+                    try {
+                        if (ActivityCompat.checkSelfPermission(BarcodeScan.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+
+                            cameraSource.start(surfaceView.getHolder());
+                        } else {
+                            ActivityCompat.requestPermissions(BarcodeScan.this, new
+                                    String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
-            }
 
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-            }
+                @Override
+                public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+                }
 
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
+                @Override
+                public void surfaceDestroyed(SurfaceHolder holder) {
 
-                Log.d("","cameraSource.stop()");
-                cameraSource.stop();
-            }
-        });
+                    Log.d("","cameraSource.stop()");
+                    cameraSource.stop();
+                }
+            });
 
 
-        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
-            @Override
-            public void release() {
-                Toast.makeText(getApplicationContext(), "To prevent memory leaks barcode scanner has been stopped", Toast.LENGTH_SHORT).show();
-            }
+            barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
+                @Override
+                public void release() {
+                    Toast.makeText(getApplicationContext(), "To prevent memory leaks barcode scanner has been stopped", Toast.LENGTH_SHORT).show();
+                }
 
-            @Override
-            public void receiveDetections(Detector.Detections<Barcode> detections) {
-                final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-                Log.d("","barcodes"+barcodes.size());
-                if (barcodes.size() != 0) {
-                    txtBarcodeValue.post(new Runnable() {
-                        @Override
-                        public void run() {
+                @Override
+                public void receiveDetections(Detector.Detections<Barcode> detections) {
+                    final SparseArray<Barcode> barcodes = detections.getDetectedItems();
+                    Log.d("","barcodes"+barcodes.size());
+                    if (barcodes.size() != 0) {
+                        txtBarcodeValue.post(new Runnable() {
+                            @Override
+                            public void run() {
 
-                            intentData = barcodes.valueAt(0).displayValue;
-                            Log.d("","intentData"+intentData);
+                                intentData = barcodes.valueAt(0).displayValue;
+                                Log.d("","intentData"+intentData);
                                 if(intentData != "") {
                                     cameraSource.stop();
 
@@ -316,7 +320,7 @@ public class BarcodeScan extends AppCompatActivity /*implements BarcodeReader.Ba
                                                 ActivityCompat.requestPermissions(BarcodeScan.this, new
                                                         String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                                             }
-                                           // cameraSource.start(surfaceView.getHolder());
+                                            // cameraSource.start(surfaceView.getHolder());
 
                                         }
                                     }, 5000);
@@ -334,14 +338,18 @@ public class BarcodeScan extends AppCompatActivity /*implements BarcodeReader.Ba
 
                                 }
 
-                                }
+                            }
 
 
-                       // }
-                    });
+                            // }
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }catch (Exception ex){
+            Toast.makeText(this, "qr error"+ex.getMessage().toString(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void addtocart(String productid, String productname, String image, String pacK_price, int qty, Float total, String PAcksize, String packsize, String price, String pacK_unit, String packunit, String userID, String productCode) {

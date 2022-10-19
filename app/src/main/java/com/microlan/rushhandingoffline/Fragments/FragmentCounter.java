@@ -83,7 +83,7 @@ public class FragmentCounter extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_counters, container, false);
 
-        AddNewCutomerText = (TextView)rootView.findViewById(R.id.addNewCustomerText);
+//        AddNewCutomerText = (TextView)rootView.findViewById(R.id.addNewCustomerText);
         ProductsGrid = (ExpandableHeightGridView)rootView.findViewById(R.id.productsGrid);
         BarcodeScanImage = (ImageView)rootView.findViewById(R.id.barcodeScanImage);
         BarcodeNumberText = (TextView)rootView.findViewById(R.id.barcodeNumberEdit);

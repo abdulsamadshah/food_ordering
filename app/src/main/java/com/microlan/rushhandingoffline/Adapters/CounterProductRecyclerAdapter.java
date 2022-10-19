@@ -98,7 +98,7 @@ public class CounterProductRecyclerAdapter extends RecyclerView.Adapter<CounterP
                     } else {
                         tempQuan++;
 
-                       int price= Integer.parseInt(cartprice.get(position));
+                       float price= Float.parseFloat(cartprice.get(position));
                        int qty=tempQuan;
                        Float total= Float.valueOf(price*qty);
 

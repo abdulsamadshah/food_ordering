@@ -40,16 +40,6 @@
                         android:textColor="@android:color/black"
                         android:text="Select Customer"/>
 
-                    <TextView
-                        android:layout_width="0sp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:id="@+id/addNewCustomerText"
-                        android:text="+ Add New Customer"/>
-
                 </LinearLayout>
 
                 <LinearLayout

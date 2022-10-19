@@ -23,15 +23,8 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.microlan.rushhandingoffline.Adapters.OrdersAdapter;
 import com.microlan.rushhandingoffline.DB.OrderDataDBHelper;
 import com.microlan.rushhandingoffline.DB.OrderDataDetailDBHelper;
 import com.microlan.rushhandingoffline.DBAdapter.OrderHistoeryAdapter;
@@ -44,7 +37,6 @@ import com.microlan.rushhandingoffline.Util.BluetoothUtil;
 import com.microlan.rushhandingoffline.Util.Utils;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -53,9 +45,7 @@ import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 public class Orders extends AppCompatActivity {
 

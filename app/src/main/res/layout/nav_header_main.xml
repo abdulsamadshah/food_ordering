@@ -10,11 +10,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200sp"
+        android:layout_width="250dp"
         android:layout_height="150sp"
         android:padding="10sp"
-        android:layout_marginLeft="20sp"
-        app:srcCompat="@drawable/microlan" />
+        app:srcCompat="@drawable/indiannavy" />
 
     <View
         android:layout_width="match_parent"

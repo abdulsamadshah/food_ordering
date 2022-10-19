@@ -17,7 +17,7 @@ public class OrderDataDBHelper extends SQLiteOpenHelper
 {
 
     private Context context;
-    public static final String DATABASE_NAME = "orderdata.db";
+    public static final String DATABASE_NAME = "orderdatas.db";
     private static final int DATABASE_VERSION = 1;
     public static final String TABLE_NAME = "orderdata_table";
 

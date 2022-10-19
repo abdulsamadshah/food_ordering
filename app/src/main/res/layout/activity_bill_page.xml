@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="70sp"
@@ -17,207 +17,214 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
+
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_weight=".8"
-                    android:layout_height="80sp"
-                    android:src="@drawable/microlan"
                     android:id="@+id/storeImage"
+                    android:layout_width="47dp"
+                    android:layout_height="94dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20sp"/>
+                    android:layout_weight=".8"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/indiannavy" />
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1.2"
-                    android:layout_gravity="center"
+                    android:layout_width="96dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.2"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/comp_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="5dp"
                         android:text=""
-                        android:textColor="#000"
-                        android:padding="5dp"/>
+                        android:textColor="#000" />
+
                     <TextView
                         android:id="@+id/gst_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:padding="5dp"/>
+                        android:padding="5dp"
+                        android:text="" />
                 </LinearLayout>
 
             </LinearLayout>
 
 
             <TextView
+                android:id="@+id/order_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
                 android:layout_marginLeft="15sp"
+                android:text="Order No:"
+                android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:id="@+id/order_id"
-                android:textStyle="bold"
-                android:text="Order No:"/>
+                android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:layout_marginLeft="15sp"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:ellipsize="end"
                 android:id="@+id/customerNameText"
-                android:text="Customer Name : "/>
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:layout_marginLeft="15sp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="1"
+                android:text="Customer Name : "
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:ellipsize="end"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/customerAddressText"
-                android:text="Customer Address : "/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15sp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:text="Customer Address : "
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1sp"
                 android:layout_marginTop="5sp"
-                android:background="#BDBDBD"
-                android:layout_marginBottom="15sp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
+                android:layout_marginBottom="15sp"
+                android:background="#BDBDBD" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="5sp"
-                android:weightSum="7"
-
-                android:layout_marginRight="5sp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight=".8"
-                    android:layout_height="match_parent"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="Sr. No."/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="2.2"
-                    android:layout_height="match_parent"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="Product"/>
-                <TextView
-                    android:layout_width="100sp"
-                    android:layout_height="match_parent"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    android:gravity="center"
-                    android:text="color"/>
+                android:orientation="vertical">
 
 
-                <TextView
-                    android:layout_width="70sp"
-                    android:layout_height="match_parent"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    android:gravity="center"
-                    android:text="Size"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="QTY"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1.5"
-                    android:layout_height="match_parent"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="Rate"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1.5"
-                    android:layout_height="match_parent"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="Total"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1sp"
-                android:layout_marginTop="5sp"
-                android:background="#BDBDBD"
-                android:layout_marginBottom="10sp"/>
-
-                <com.microlan.rushhandingoffline.Views.ExpandableHeightGridView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:verticalSpacing="2sp"
                     android:layout_marginLeft="5sp"
                     android:layout_marginRight="5sp"
-                    android:paddingBottom="5sp"
+                    android:orientation="horizontal"
+
+                    android:weightSum="7">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".8"
+                        android:gravity="center"
+                        android:text="Sr. No."
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.2"
+                        android:gravity="center"
+                        android:text="Product"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="100sp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="color"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="70sp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Size"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="QTY"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:gravity="center"
+                        android:text="Rate"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:gravity="center"
+                        android:text="Total"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="10sp"
+                    android:background="#BDBDBD" />
+
+                <com.microlan.rushhandingoffline.Views.ExpandableHeightGridView
+                    android:id="@+id/productsGrid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="5sp"
                     android:layout_marginBottom="20dp"
                     android:clipToPadding="false"
-                    android:id="@+id/productsGrid">
+                    android:paddingBottom="5sp"
+                    android:verticalSpacing="2sp">
 
                 </com.microlan.rushhandingoffline.Views.ExpandableHeightGridView>
 
-                </LinearLayout>
-
+            </LinearLayout>
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1sp"
                 android:layout_marginTop="5sp"
-                android:background="#BDBDBD"/>
+                android:background="#BDBDBD" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="10sp">
+                android:layout_margin="10sp"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -228,21 +235,21 @@
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="SUB TOTAL"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="SUB TOTAL"/>
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="15sp"
                         android:id="@+id/orderbeforeText"
-                        android:textStyle="bold"
+                        android:layout_width="0sp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="end"
-                        android:text="30000"/>
+                        android:text="30000"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -256,117 +263,117 @@
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="BEFORE GST TOTAL"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:text="BEFORE GST TOTAL"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/orderSubTotalText"
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="30000"
                         android:textColor="@android:color/darker_gray"
                         android:textSize="15sp"
-                        android:textStyle="bold"
-                        android:gravity="end"
-                        android:id="@+id/orderSubTotalText"
-                        android:text="30000"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/gstLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10sp"
-                    android:id="@+id/gstLayout"
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/cgstLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/cgstLayout"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="0sp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="CGST"
                             android:textColor="@android:color/darker_gray"
                             android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:text="CGST"/>
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="0sp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:gravity="end"
-                            android:maxLength="5"
                             android:id="@+id/cgstText"
-                            android:text="300"/>
+                            android:layout_width="0sp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:maxLength="5"
+                            android:text="300"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:id="@+id/sgstLayout"
-                        android:layout_marginTop="10sp">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="0sp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="SGST"
                             android:textColor="@android:color/darker_gray"
                             android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:text="SGST"/>
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="0sp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="15sp"
-                            android:maxLength="5"
-                            android:textStyle="bold"
-                            android:gravity="end"
                             android:id="@+id/sgstText"
-                            android:text="300"/>
+                            android:layout_width="0sp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:maxLength="5"
+                            android:text="300"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/igstLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:id="@+id/igstLayout"
-                        android:layout_marginTop="10sp">
+                        android:layout_marginTop="10sp"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="0sp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:text="IGST"
                             android:textColor="@android:color/darker_gray"
                             android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:text="IGST"/>
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:layout_width="0sp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="15sp"
-                            android:maxLength="5"
-                            android:textStyle="bold"
-                            android:gravity="end"
                             android:id="@+id/igstText"
-                            android:text="300"/>
+                            android:layout_width="0sp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:maxLength="5"
+                            android:text="300"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -376,8 +383,9 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1sp"
-                    android:background="#BDBDBD"
-                    android:layout_marginTop="12sp"/>
+                    android:layout_marginTop="12sp"
+                    android:background="#BDBDBD" />
+
                 <LinearLayout
                     android:id="@+id/walletlay"
                     android:layout_width="match_parent"
@@ -389,22 +397,22 @@
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="Total Amount "
                         android:textColor="@android:color/black"
                         android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Wallet Amount "/>
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@android:color/black"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:gravity="end"
-                        android:layout_marginRight="5dp"
                         android:id="@+id/walletamt"
-                        android:text="0"/>
+                        android:layout_width="0sp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -412,30 +420,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2sp"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="Discount "
                         android:textColor="@android:color/black"
                         android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Discount "/>
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="0sp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="@android:color/black"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:gravity="end"
-                        android:layout_marginRight="5dp"
                         android:id="@+id/discount_amts"
-                        android:text="0"/>
+                        android:layout_width="0sp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -446,22 +456,22 @@
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="Payment Mode "
                         android:textColor="@android:color/black"
                         android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Payment Mode "/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/paymentmode"
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="0"
                         android:textColor="@android:color/black"
                         android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:gravity="end"
-                        android:layout_marginRight="5dp"
-                        android:id="@+id/paymentmode"
-                        android:text="0"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -469,27 +479,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12sp"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="Total Price"
                         android:textColor="@android:color/black"
                         android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Total Price"/>
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/finalTotalText"
                         android:layout_width="0sp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:gravity="end"
+                        android:text="30300"
                         android:textColor="@android:color/black"
                         android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:gravity="end"
-                        android:id="@+id/finalTotalText"
-                        android:text="30300"/>
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -503,35 +514,38 @@
         android:id="@+id/saveorder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:textColor="#fff"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorAccent"
+        android:text="Submit"
+        android:textColor="#fff" />
+
     <LinearLayout
+        android:id="@+id/printsharelay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
         android:layout_alignParentBottom="true"
 
-        android:id="@+id/printsharelay"
-        android:weightSum="2"
-        android:orientation="horizontal">
+        android:background="@color/colorAccent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
         <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:textColor="@android:color/white"
             android:id="@+id/printBtn"
-            android:text="Home"/>
-        <Button
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@color/colorAccent"
-            android:textColor="@android:color/white"
+            android:text="Home"
+            android:textColor="@android:color/white" />
+
+        <Button
             android:id="@+id/share"
-            android:text="Share"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:text="Share"
+            android:textColor="@android:color/white" />
 
 
     </LinearLayout>

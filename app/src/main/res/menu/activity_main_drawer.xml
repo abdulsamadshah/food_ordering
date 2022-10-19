@@ -17,6 +17,11 @@
                 android:id="@+id/nav_order_list_offile"
                     android:icon="@drawable/orderlist"
                 android:title="Order List offline" />
+
+            <item
+                android:id="@+id/syncdata"
+                    android:icon="@drawable/orderlist"
+                android:title="Synce Order" />
             <!--<item-->
                 <!--android:id="@+id/nav_trending_products"-->
                 <!--android:title="Trending Products" />-->

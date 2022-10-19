@@ -18,10 +18,15 @@ public class BillDetailsDialog extends Dialog {
         this.c = a;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.bill_details_dialog);
+
+
+
     }
+
 }

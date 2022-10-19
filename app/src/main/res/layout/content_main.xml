@@ -27,7 +27,7 @@
                 android:layout_height="100sp"
                 android:orientation="vertical"
                 android:padding="5sp"
-                android:background="#7E57C2">
+                android:background="#232371">
 
                 <EditText
                     android:layout_width="match_parent"
@@ -143,5 +143,6 @@
         </LinearLayout>
 
     </ScrollView>
+
 
 </LinearLayout>

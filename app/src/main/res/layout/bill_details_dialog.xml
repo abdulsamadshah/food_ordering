@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="290sp"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="290sp"
     android:layout_height="match_parent"
-    android:scrollbars="none"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:scrollbars="none">
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10sp">
+        android:layout_margin="10sp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,31 +17,31 @@
 
             <TextView
                 android:layout_width="0sp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Search Customer"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:text="Search Customer"/>
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/addNewCustomerText"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:gravity="center"
+                android:text="+ Add New"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="15sp"
-                android:textStyle="bold"
-                android:id="@+id/addNewCustomerText"
-                android:text="+ Add New"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5sp">
+            android:layout_marginTop="5sp"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0sp"
@@ -49,20 +49,19 @@
                 android:layout_weight="1">
 
                 <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/customersEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10sp"
-                    android:hint="Select Customer..."
-                    android:textSize="16sp"
-                    android:inputType="text"
                     android:background="@drawable/br_round_edittext"
                     android:drawableStart="@drawable/search_black_icon"
                     android:drawablePadding="5sp"
-                    android:id="@+id/customersEdit"
-                    android:textColor="@android:color/black" />
+                    android:hint="Select Customer..."
+                    android:inputType="text"
+                    android:padding="10sp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp" />
 
             </LinearLayout>
-
 
 
         </LinearLayout>
@@ -71,10 +70,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
+            android:text="Select Payment Type"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:text="Select Payment Type"/>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,341 +83,368 @@
             android:background="@drawable/br_round_edittext">
 
             <com.reginald.editspinner.EditSpinner
+                android:id="@+id/paymentTypeEdit"
+                style="@style/Base.Widget.AppCompat.Spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Base.Widget.AppCompat.Spinner"
-                android:padding="10sp"
-                android:inputType="none"
-                android:id="@+id/paymentTypeEdit"
                 android:editable="false"
-                android:hint="Payment Type"/>
+                android:hint="Payment Type"
+                android:inputType="none"
+                android:padding="10sp" />
 
         </LinearLayout>
 
         <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="15sp"-->
-            <!--android:textStyle="bold"-->
-            <!--android:id="@+id/customerPointsText"-->
-            <!--android:text="Customer Points : 0"-->
-            <!--android:layout_marginBottom="5sp"/>-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="15sp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:id="@+id/customerPointsText"-->
+        <!--android:text="Customer Points : 0"-->
+        <!--android:layout_marginBottom="5sp"/>-->
         <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@drawable/br_round_edittext"-->
-            <!--android:padding="10sp"-->
-            <!--android:hint="Enter Customer Points..."-->
-            <!--android:textSize="15sp"-->
-            <!--android:layout_marginBottom="5sp"-->
-            <!--android:inputType="numberDecimal"-->
-            <!--android:maxLength="2"-->
-            <!--android:id="@+id/customerPointsEdit"-->
-            <!--android:textColor="@android:color/black"/>-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/br_round_edittext"-->
+        <!--android:padding="10sp"-->
+        <!--android:hint="Enter Customer Points..."-->
+        <!--android:textSize="15sp"-->
+        <!--android:layout_marginBottom="5sp"-->
+        <!--android:inputType="numberDecimal"-->
+        <!--android:maxLength="2"-->
+        <!--android:id="@+id/customerPointsEdit"-->
+        <!--android:textColor="@android:color/black"/>-->
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:layout_marginTop="10sp"
-            android:textStyle="bold"
-            android:text="Offer Code"/>
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:textColor="@android:color/black"-->
+        <!--            android:textSize="15sp"-->
+        <!--            android:layout_marginTop="10sp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            android:text="Offer Code"/>-->
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/br_round_edittext"
-            android:padding="10sp"
-            android:layout_marginTop="5sp"
-            android:hint="Enter Offer Code..."
-            android:textSize="15sp"
-            android:inputType="text"
-            android:id="@+id/offerCodeEdit"
-            android:textColor="@android:color/black"/>
+        <!--        <EditText-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/br_round_edittext"-->
+        <!--            android:padding="10sp"-->
+        <!--            android:layout_marginTop="5sp"-->
+        <!--            android:hint="Enter Offer Code..."-->
+        <!--            android:textSize="15sp"-->
+        <!--            android:inputType="text"-->
+        <!--            android:id="@+id/offerCodeEdit"-->
+        <!--            android:textColor="@android:color/black"/>-->
 
         <TextView
             android:id="@+id/offertxts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="GST Amount"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:layout_marginTop="10sp"
             android:textStyle="bold"
-            android:text="GST Amount"/>
+            android:visibility="gone" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/br_round_edittext"
-            android:padding="10sp"
-            android:layout_marginTop="5sp"
-            android:hint="Cart Total Amount"
-            android:textSize="15sp"
-            android:inputType="text"
             android:id="@+id/gst_total"
-            android:textColor="@android:color/black"/>
-        <TextView
-            android:id="@+id/offertxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/br_round_edittext"
+            android:hint="Cart Total Amount"
+            android:inputType="text"
+            android:padding="10sp"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:layout_marginTop="10sp"
-            android:textStyle="bold"
-            android:text="SubTotal Amount With Gst"/>
+            android:visibility="gone" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/br_round_edittext"
-            android:padding="10sp"
-            android:layout_marginTop="5sp"
-            android:hint="Cart Total Amount"
-            android:textSize="15sp"
-            android:inputType="text"
-            android:id="@+id/cart_total"
-            android:textColor="@android:color/black"/>
+        <!--        <TextView-->
+        <!--            android:id="@+id/offertxt"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:textColor="@android:color/black"-->
+        <!--            android:textSize="15sp"-->
+        <!--            android:layout_marginTop="10sp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            android:text="SubTotal Amount With Gst"/>-->
+
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/br_round_edittext"-->
+        <!--            android:padding="10sp"-->
+        <!--            android:layout_marginTop="5sp"-->
+        <!--            android:hint="Cart Total Amount"-->
+        <!--            android:textSize="15sp"-->
+        <!--            android:inputType="text"-->
+        <!--            android:id="@+id/cart_total"-->
+        <!--            android:textColor="@android:color/black"/>-->
 
         <TextView
             android:id="@+id/dicleb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Discount"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:text="Discount"/>
+            android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/radio_lay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/radio_lay"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <RadioGroup
                 android:id="@+id/yourgroup"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="1"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal"
+                android:weightSum="1">
+
                 <RadioButton
                     android:id="@+id/price"
                     android:layout_width="0dp"
-                    android:layout_weight=".4"
-
                     android:layout_height="wrap_content"
-                    android:text="Flat(₹)"/>
+                    android:layout_weight=".4"
+                    android:text="Flat(₹)" />
+
                 <RadioButton
                     android:id="@+id/discount"
                     android:layout_width="0dp"
-                    android:layout_weight=".6"
                     android:layout_height="wrap_content"
-                    android:text=" Percentage (%)"/>
+                    android:layout_weight=".6"
+                    android:text=" Percentage (%)" />
 
 
             </RadioGroup>
 
         </LinearLayout>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/br_round_edittext"
-            android:padding="10sp"
-            android:layout_marginTop="5sp"
-            android:hint="Enter Discount Amount"
-            android:textSize="15sp"
-            android:text="0"
-            android:inputType="number"
-            android:id="@+id/discountEdit"
-            android:textColor="@android:color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:visibility="gone"
-                android:id="@+id/after_dis"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#fff"
-                android:background="#0000"
-                android:visibility="gone"
-                android:id="@+id/after_dis_per"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/br_round_edittext"
-            android:padding="10sp"
-            android:layout_marginTop="5sp"
-            android:hint="Enter Discount Percentage..."
-            android:textSize="15sp"
-            android:visibility="gone"
-            android:inputType="numberDecimal"
-            android:id="@+id/perdiscountEdit"
-            android:textColor="@android:color/black"/>
 
+        <EditText
+            android:id="@+id/discountEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/br_round_edittext"
+            android:hint="Enter Discount Amount"
+            android:inputType="number"
+            android:padding="10sp"
+            android:text="0"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/after_dis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/after_dis_per"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:text="0"
+            android:textColor="#fff"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/perdiscountEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/br_round_edittext"
+            android:hint="Enter Discount Percentage..."
+            android:inputType="numberDecimal"
+            android:padding="10sp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:visibility="gone" />
 
 
         <TextView
             android:id="@+id/finaltxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="SubTotal Amount"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:visibility="gone"
-            android:layout_marginTop="10sp"
             android:textStyle="bold"
-            android:text="SubTotal Amount"/>
+            android:visibility="gone" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/br_round_edittext"
-            android:padding="10sp"
-            android:layout_marginTop="5sp"
-            android:hint="Balance Amount..."
-            android:textSize="15sp"
-            android:inputType="number"
-            android:visibility="gone"
-            android:clickable="false"
             android:id="@+id/OutstandingAmountEdit"
-            android:textColor="@android:color/black"/>
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0"
-            android:background="#000"
-            android:visibility="gone"
-            android:textColor="#FFEB3B"
-            android:id="@+id/sumtotal"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:visibility="gone"
-            android:id="@+id/sumtotalamt"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"
             android:layout_marginTop="5sp"
-            android:id="@+id/walletBalanceText"
-            android:text="Wallet : 0"
-            android:layout_marginBottom="5sp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:background="@drawable/br_round_edittext"
-            android:padding="10sp"
-            android:hint="Enter Wallet..."
-            android:textSize="15sp"
-            android:layout_marginBottom="5sp"
-            android:inputType="number"
-            android:maxLength="2"
-            android:id="@+id/walletPointsEdit"
-            android:textColor="@android:color/black"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:layout_marginTop="10sp"
-            android:textStyle="bold"
-            android:text="Balance Amount"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/br_round_edittext"
-            android:padding="10sp"
-            android:layout_marginTop="5sp"
-            android:hint="Final Amount..."
-            android:textSize="15sp"
-            android:inputType="text"
             android:clickable="false"
+            android:hint="Balance Amount..."
+            android:inputType="number"
+            android:padding="10sp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/sumtotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000"
+            android:text="0"
+            android:textColor="#FFEB3B"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/sumtotalamt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/walletBalanceTextss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"
+            android:text="Wallet Amount:"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/walletBalanceText"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="-25sp"
+            android:layout_marginBottom="5sp"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/walletPointsEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5sp"
+            android:background="@drawable/br_round_edittext"
+            android:hint="Enter Wallet..."
+            android:padding="10sp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="Bill Amount"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/OutstandingEdit"
-            android:textColor="@android:color/black"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/br_round_edittext"
+            android:clickable="false"
+            android:hint="Final Amount..."
+            android:padding="10sp"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
 
         <CheckBox
+            android:id="@+id/deliveryCheck"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5sp"
+            android:text="Delivery Available"
             android:textColor="@android:color/black"
             android:textSize="16sp"
-            android:id="@+id/deliveryCheck"
-            android:textStyle="bold"
-            android:text="Delivery Available"/>
+            android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/deliveryLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/deliveryLayout"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/addnewaddress"
                 android:layout_width="match_parent"
-                android:gravity="right"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:gravity="right"
+                android:text="+ Add Address"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="15sp"
-                android:id="@+id/addnewaddress"
-                android:textStyle="bold"
-                android:layout_marginRight="20dp"
-                android:text="+ Add Address"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
+                android:text="Delivery Address"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:layout_marginTop="5sp"
-                android:textStyle="bold"
-                android:text="Delivery Address"/>
+                android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/addressracycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
             </androidx.recyclerview.widget.RecyclerView>
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:visibility="gone"
                 android:id="@+id/addaddresslay"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="5sp">
+                    android:layout_marginTop="5sp"
+                    android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
+                        android:text="Address"
                         android:textColor="@android:color/black"
-                        android:text="Address"/>
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
                     <EditText
+                        android:id="@+id/customerAddressEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="@android:color/black"
                         android:layout_marginTop="3sp"
                         android:layout_marginBottom="3sp"
-                        android:padding="10sp"
-                        android:id="@+id/customerAddressEdit"
+                        android:background="@drawable/br_round_edittext"
                         android:hint="Enter Address"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:background="@drawable/br_round_edittext"/>
+                        android:padding="10sp"
+                        android:textColor="@android:color/black"
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -428,63 +454,67 @@
 
                     <LinearLayout
                         android:layout_width="0sp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="5sp">
+                        android:layout_marginTop="5sp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
+                            android:text="Near Area"
                             android:textColor="@android:color/black"
-                            android:text="Near Area"/>
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
                         <EditText
+                            android:id="@+id/customerNearAreaEdit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textColor="@android:color/black"
                             android:layout_marginTop="3sp"
                             android:layout_marginBottom="3sp"
-                            android:padding="10sp"
+                            android:background="@drawable/br_round_edittext"
                             android:hint="Enter Area"
                             android:inputType="text"
                             android:maxLines="1"
-                            android:id="@+id/customerNearAreaEdit"
-                            android:background="@drawable/br_round_edittext"/>
+                            android:padding="10sp"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="0sp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"/>
+                        android:layout_weight="0.2" />
 
                     <LinearLayout
                         android:layout_width="0sp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="5sp">
+                        android:layout_marginTop="5sp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
+                            android:text="City"
                             android:textColor="@android:color/black"
-                            android:text="City"/>
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
                         <EditText
+                            android:id="@+id/customerCityEdit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textColor="@android:color/black"
                             android:layout_marginTop="3sp"
                             android:layout_marginBottom="3sp"
-                            android:padding="10sp"
+                            android:background="@drawable/br_round_edittext"
                             android:hint="Enter City"
                             android:inputType="text"
                             android:maxLines="1"
-                            android:id="@+id/customerCityEdit"
-                            android:background="@drawable/br_round_edittext"/>
+                            android:padding="10sp"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -496,35 +526,38 @@
 
                     <LinearLayout
                         android:layout_width="0sp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="5sp">
+                        android:layout_marginTop="5sp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
+                            android:text="State"
                             android:textColor="@android:color/black"
-                            android:text="State"/>
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3sp"
                             android:layout_marginBottom="3sp"
                             android:background="@drawable/br_round_edittext">
+
                             <com.reginald.editspinner.EditSpinner
+                                android:id="@+id/customerStateEdit"
+                                style="@style/Base.Widget.AppCompat.Spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="15sp"
-                                android:padding="10sp"
-                                style="@style/Base.Widget.AppCompat.Spinner"
-                                android:textColor="@android:color/black"
-                                android:id="@+id/customerStateEdit"
+                                android:editable="false"
                                 android:hint="State"
                                 android:inputType="none"
-                                android:editable="false"
-                                android:maxLines="1"/>
+                                android:maxLines="1"
+                                android:padding="10sp"
+                                android:textColor="@android:color/black"
+                                android:textSize="15sp" />
                         </LinearLayout>
 
 
@@ -533,48 +566,50 @@
                     <View
                         android:layout_width="0sp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"/>
+                        android:layout_weight="0.2" />
 
                     <LinearLayout
                         android:layout_width="0sp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="5sp">
+                        android:layout_marginTop="5sp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
+                            android:text="Pincode"
                             android:textColor="@android:color/black"
-                            android:text="Pincode"/>
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
                         <EditText
+                            android:id="@+id/customerPincodeEdit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textColor="@android:color/black"
                             android:layout_marginTop="3sp"
                             android:layout_marginBottom="3sp"
-                            android:padding="10sp"
-                            android:maxLength="6"
+                            android:background="@drawable/br_round_edittext"
                             android:hint="Enter Pincode"
                             android:inputType="numberDecimal"
+                            android:maxLength="6"
                             android:maxLines="1"
-                            android:id="@+id/customerPincodeEdit"
-                            android:background="@drawable/br_round_edittext"/>
+                            android:padding="10sp"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/saveCustomerBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10sp"
                     android:background="@color/colorAccent"
+                    android:text="Save"
                     android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:id="@+id/saveCustomerBtn"
-                    android:text="Save"/>
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -582,16 +617,16 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/saveBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
             android:layout_marginBottom="20sp"
             android:background="@color/colorAccent"
+            android:text="Submit"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:id="@+id/saveBtn"
-            android:text="Save"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 </ScrollView>
